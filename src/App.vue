@@ -23,7 +23,6 @@
                   <v-toolbar-title>Supeeeeeeeer Heroes !!!</v-toolbar-title>
 
                 </v-toolbar>
-                <hero />
                 <heroes/>
               </v-card>
             </v-col>
@@ -34,14 +33,12 @@
 </template>
 
 <script>
-import Hero from './components/Hero';
 import Heroes from './components/Heroes';
 
 export default {
   name: 'SuperherosApp',
 
   components: {
-    Hero,
     Heroes,
   },
 

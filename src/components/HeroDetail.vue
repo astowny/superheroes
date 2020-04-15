@@ -34,6 +34,8 @@
 </template>
 
 <script>
+    //
+
     export default {
         name: "HeroDetail",
         props: {
@@ -41,6 +43,9 @@
                 type: Object,
                 required: true
             }
+        },
+        created() {
+            this.$store.dispatch('getHeroes')
         }
     }
 </script>
