@@ -1,7 +1,12 @@
 <template>
     <div>
+        <!--    hero details    -->
+        <div class="my-2" v-if="selectedHero">
+            <hero-detail :hero="selectedHero"/>
+        </div>
+<!--     list items       -->
         <v-list-item
-                v-for="(hero) in heroes"
+                v-for="(hero) in currentPageHeroes"
                 :key="hero.name"
                 @click="selectHero(hero)"
                 :class="{active : hero === selectedHero}"
@@ -15,35 +20,48 @@
                 <v-list-item-subtitle v-html="hero.description"></v-list-item-subtitle>
             </v-list-item-content>
         </v-list-item>
-        <div class="my-2" v-if="selectedHero">
-            <hero-detail :hero="selectedHero"/>
-        </div>
+<!--  pagination  -->
+        <pagination :heroes="heroes"  @input="changePage" />
     </div>
 </template>
 
 <script>
     import HeroDetail from "./HeroDetail";
+    import Pagination from "./Pagination";
 
     export default {
         name: "Heroes",
         components: {
-            HeroDetail
+            HeroDetail,
+            Pagination
         },
         data() {
             return {
-                selectedHero: null
+                selectedHero: null,
             }
         },
         methods: {
             selectHero(hero) {
                 this.selectedHero = hero
+            },
+            changePage: function(){
+                // clear selected hero
+                this.selectedHero = ''
             }
         },
         computed: {
             heroes() {
                 return this.$store.state.heroes
+            },
+            currentPageHeroes() {
+                // where to slice : currentPage - 1 * nbItemsPerPage
+                let startSlice = this.$store.state.pagination.visibleItemsPerPageCount * (this.$store.state.pagination.currentPage - 1)
+                // the end of slice : startSilce + nbItemsPerPage except if end of array in this case length + 1
+                let endSlice = startSlice + this.$store.state.pagination.visibleItemsPerPageCount < this.$store.state.heroes.length ? (startSlice + this.$store.state.pagination.visibleItemsPerPageCount) : this.$store.state.heroes.length + 1
+                // set the current page hero list
+                return this.$store.state.heroes.slice(startSlice, endSlice)
             }
-        }
+        },
     }
 </script>
 

@@ -45,10 +45,7 @@ export default {
     ChangeLocale
   },
   data: () => ({
-  }),
-  created() {
-    this.$store.dispatch('getHeroes')
-  }
+  })
 };
 </script>
 
