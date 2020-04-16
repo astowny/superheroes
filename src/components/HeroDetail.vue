@@ -7,7 +7,7 @@
         <v-list-item three-line>
             <v-list-item-content>
                 <div class="overline mb-4">{{hero.id}}</div>
-                <v-list-item-title class="headline mb-1">{{hero.name}} Details</v-list-item-title>
+                <v-list-item-title class="headline mb-1">{{ $t('details', {name: hero.name})}}</v-list-item-title>
                 <v-text-field
                         label="Name"
                         filled

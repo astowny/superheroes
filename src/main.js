@@ -11,13 +11,16 @@ Vue.config.productionTip = false
 
 const messages = {
   en: {
-    title: "Supeeeeer Heroes !!!"
+    title: "Supeeeeer Heroes !!!",
+    details: "{name} Details"
   },
   ja: {
-    title: 'こんにちは、世界'
+    title: 'スーパーヒーロー !!!',
+    details: "{name}の詳細"
   },
   fr: {
-    title: "Supeeeeer Héros !!!"
+    title: "Supeeeeer Héros !!!",
+    details: "Détails de {name}"
   }
 }
 // Create VueI18n instance with options
