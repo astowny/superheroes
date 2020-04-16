@@ -7,11 +7,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    heroes:[]
+    heroes:[],
+    locale: "fr"
   },
   mutations: {
     setHeroes(state, {heroes}){
       state.heroes = heroes
+    },
+    setLang(state,lang){
+      state.locale = lang
     }
   },
   actions: {
@@ -35,7 +39,6 @@ export default new Vuex.Store({
           .then(response => {
             if (response.status === 200) {
               context.commit("setHeroes", {heroes:response.data.data.results})
-              console.log(response.data.data.results)
             } else {
               console.log("No status 200 but error : " + response.status)
             }

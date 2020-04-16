@@ -8,13 +8,13 @@
             <v-list-item-content>
                 <div class="overline mb-4">{{hero.id}}</div>
                 <v-list-item-title class="headline mb-1">{{hero.name}} Details</v-list-item-title>
-                <v-list-item-subtitle>{{hero.description}}</v-list-item-subtitle>
                 <v-text-field
                         label="Name"
                         filled
                         dense
                         v-model="hero.name">
                 </v-text-field>
+                <p>{{hero.description}}</p>
             </v-list-item-content>
 
             <v-list-item-avatar

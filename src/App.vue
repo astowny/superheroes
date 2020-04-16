@@ -12,16 +12,18 @@
             <v-col
                     cols="12"
                     sm="8"
-                    md="4"
+                    md="6"
             >
               <v-card class="elevation-12 pb-4">
                 <v-toolbar
                         color="primary"
                         dark
                         flat
+                        height="80"
                 >
-                  <v-toolbar-title>Supeeeeeeeer Heroes !!!</v-toolbar-title>
-
+                    <v-toolbar-title>{{ $t("title") }}</v-toolbar-title>
+                    <v-spacer></v-spacer>
+                    <change-locale></change-locale>
                 </v-toolbar>
                 <heroes/>
               </v-card>
@@ -34,17 +36,21 @@
 
 <script>
 import Heroes from './components/Heroes';
+import ChangeLocale from './components/ChangeLocale';
 
 export default {
   name: 'SuperherosApp',
   components: {
     Heroes,
+    ChangeLocale
   },
   data: () => ({
-    //
   }),
   created() {
     this.$store.dispatch('getHeroes')
   }
 };
 </script>
+
+<style scoped>
+</style>
