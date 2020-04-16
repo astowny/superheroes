@@ -7,23 +7,21 @@
                 :class="{active : hero === selectedHero}"
         >
             <v-list-item-avatar>
-                <v-img :src="hero.imgUrl"></v-img>
+                <v-img :src="hero.thumbnail.path + '/portrait_medium.' + hero.thumbnail.extension"></v-img>
             </v-list-item-avatar>
 
             <v-list-item-content>
-
                 <v-list-item-title v-html="`${hero.id} - ${hero.name}`"></v-list-item-title>
                 <v-list-item-subtitle v-html="hero.description"></v-list-item-subtitle>
             </v-list-item-content>
         </v-list-item>
-        <div v-if="selectedHero">
+        <div class="my-2" v-if="selectedHero">
             <hero-detail :hero="selectedHero"/>
         </div>
     </div>
 </template>
 
 <script>
-    import {HEROES} from '../app/mock-heroes'
     import HeroDetail from "./HeroDetail";
 
     export default {
@@ -33,7 +31,6 @@
         },
         data() {
             return {
-                heroes : HEROES,
                 selectedHero: null
             }
         },
@@ -41,12 +38,17 @@
             selectHero(hero) {
                 this.selectedHero = hero
             }
+        },
+        computed: {
+            heroes() {
+                return this.$store.state.heroes
+            }
         }
     }
 </script>
 
 <style scoped>
 .active {
-    background: teal;
+    background: lightgrey;
 }
 </style>

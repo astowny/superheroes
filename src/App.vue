@@ -37,13 +37,14 @@ import Heroes from './components/Heroes';
 
 export default {
   name: 'SuperherosApp',
-
   components: {
     Heroes,
   },
-
   data: () => ({
     //
   }),
+  created() {
+    this.$store.dispatch('getHeroes')
+  }
 };
 </script>

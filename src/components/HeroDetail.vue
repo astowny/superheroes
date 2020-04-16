@@ -22,20 +22,14 @@
                     size="80"
                     color="grey"
             >
-                <v-img :src="hero.imgUrl"></v-img>
+                <v-img :src="hero.thumbnail.path + '/portrait_medium.' + hero.thumbnail.extension"></v-img>
             </v-list-item-avatar>
         </v-list-item>
 
-        <v-card-actions>
-            <v-btn @click="hero.superpower()" text>SuperPower</v-btn>
-            <v-btn text>Back</v-btn>
-        </v-card-actions>
     </v-card>
 </template>
 
 <script>
-    //
-
     export default {
         name: "HeroDetail",
         props: {
@@ -43,9 +37,6 @@
                 type: Object,
                 required: true
             }
-        },
-        created() {
-            this.$store.dispatch('getHeroes')
         }
     }
 </script>
