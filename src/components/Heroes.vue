@@ -4,6 +4,9 @@
         <div class="my-2" v-if="selectedHero">
             <hero-detail :hero="selectedHero"/>
         </div>
+        <v-alert v-if="currentPageHeroes < 1">
+            Loading...
+        </v-alert>
 <!--     list items       -->
         <v-list-item
                 v-for="(hero) in currentPageHeroes"

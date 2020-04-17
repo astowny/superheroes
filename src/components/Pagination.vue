@@ -4,6 +4,7 @@
             :length="pageCount"
             circle
             @input="emitInput()"
+            :total-visible="totalVisible"
     ></v-pagination>
 </template>
 
@@ -23,11 +24,23 @@
         name: "Pagination",
         data() {
             return {
+                totalVisible: 7
             }
         },
         methods: {
             emitInput() {
                 this.$emit('input', this.currentPageHeroes)
+            }
+        },
+        watch: {
+            /**
+             * Loads more heroes when the current page is before the last
+             */
+            currentPage() {
+                let offset = this.heroes.length
+                if (this.currentPage >= this.pageCount - 1){
+                    this.$store.dispatch("getMoreHeroes", offset)
+                }
             }
         },
         computed: {

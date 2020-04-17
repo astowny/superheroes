@@ -33,5 +33,8 @@ new Vue({
   store,
   vuetify,
   i18n,
+  mounted() {
+    this.$store.dispatch('getMoreHeroes')
+  },
   render: h => h(App),
 }).$mount('#app')
