@@ -52,11 +52,14 @@ export default new Vuex.Store({
     },
     updateHero(state, hero){
       let heroIndex = state.heroes.findIndex(h => h.id === hero.id)
-      // console.log(hero);
-      // console.log(heroIndex);
       
       state.heroes[heroIndex] = JSON.parse(JSON.stringify(hero))
       Vue.set(state.heroes, heroIndex, hero)
+    },
+    deleteHero(state, heroId) {
+      let heroIndex = state.heroes.findIndex(h => h.id === heroId)
+
+      state.heroes.splice(heroIndex,1)
     }
   },
   actions: {

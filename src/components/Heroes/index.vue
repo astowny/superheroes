@@ -2,7 +2,7 @@
   <div>
     <!-- hero details -->
     <div v-if="selectedHero" class="my-2" >
-      <hero-detail :heroId="selectedHero.id" />
+      <hero-detail :heroId="selectedHero.id" @deleted="selectedHero = null" />
     </div>
     <v-alert v-if="!currentPageHeroes.length">Loading...</v-alert>
     <!-- list items -->
