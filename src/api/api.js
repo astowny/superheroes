@@ -1,6 +1,6 @@
 import axios from 'axios'
 import md5 from 'blueimp-md5'
-import {ADD_HEROES} from '../store/mutations-types'
+import { ADD_HEROES } from '../store/mutations-types'
 
 export default async function (contexte, offset = 0) {
   let uri = "https://cors-anywhere.herokuapp.com/http://gateway.marvel.com/v1/public/characters"
