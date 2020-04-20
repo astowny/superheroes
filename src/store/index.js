@@ -38,12 +38,25 @@ export default new Vuex.Store({
     heroes:[],
     locale: "en"
   },
+  getters: {
+    getHeroById: (state) => (id) => {
+      return state.heroes.find(h => h.id === id)
+    }
+  },
   mutations: {
     addHeroes(state, {heroes}){
       state.heroes = state.heroes.concat(heroes)
     },
     setLang(state,lang){
       state.locale = lang
+    },
+    updateHero(state, hero){
+      let heroIndex = state.heroes.findIndex(h => h.id === hero.id)
+      // console.log(hero);
+      // console.log(heroIndex);
+      
+      state.heroes[heroIndex] = JSON.parse(JSON.stringify(hero))
+      Vue.set(state.heroes, heroIndex, hero)
     }
   },
   actions: {

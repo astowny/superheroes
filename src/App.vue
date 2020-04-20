@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import Heroes from './components/Heroes';
+import Heroes from './components/Heroes/index';
 import ChangeLocale from './components/ChangeLocale';
 
 export default {
