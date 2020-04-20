@@ -5,8 +5,8 @@
       <v-list-item-content>
         <div class="overline mb-4">{{hero.id}}</div>
         <div v-if="!showEdit">
-          <v-list-item-title class="headline mb-1">{{ $t('details', {name: hero.name})}}</v-list-item-title>
-          <p>{{hero.description}}</p>
+          <v-list-item-title class="headline overflow-bw mb-1">{{ $t('details', {name: hero.name})}}</v-list-item-title>
+          <p v-if="hero.description">{{hero.description}}</p>
         </div>
         <div v-if="showEdit">
           <v-text-field v-model="cachedHero.name" dense filled label="Name"></v-text-field>
@@ -90,4 +90,7 @@ export default {
 </script>
 
 <style scoped>
+.overflow-bw {
+  white-space: unset !important;
+}
 </style>

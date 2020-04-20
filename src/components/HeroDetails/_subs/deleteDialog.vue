@@ -21,7 +21,7 @@
           class="headline grey lighten-2 text-center"
           primary-title
         >
-          You will delete the hero. (add translations)
+          {{$t('confirmationDelete')}}
         </v-card-title>
 
         <v-card-actions>
@@ -31,7 +31,7 @@
             dark
             depressed 
           >
-            Yes
+            {{$t('yes')}}
           </v-btn>
           <v-btn
             @click="dialog = false"
@@ -39,7 +39,7 @@
             depressed 
             text
           >
-            No
+            {{$t('no')}}
           </v-btn>
         </v-card-actions>
       </v-card>
