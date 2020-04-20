@@ -1,10 +1,32 @@
 <template>
   <div>
     <!-- hero details -->
-    <div v-if="selectedHero" class="my-2" >
-      <hero-detail :heroId="selectedHero.id" @deleted="selectedHero = null" @editing="handleEditing" />
+    <div v-if="selectedHero" class="my-2">
+      <hero-detail
+        :heroId="selectedHero.id"
+        @deleted="selectedHero = null"
+        @editing="handleEditing"
+      />
     </div>
-    <v-alert v-if="!currentPageHeroes.length">Loading...</v-alert>
+    <v-row
+        class="fill-height"
+        align-content="center"
+        justify="center"
+      >
+      <v-col
+      v-if="!currentPageHeroes.length"
+      class="text-center"
+      cols="6">
+        {{$t('loading')}}
+        <v-progress-linear
+          class="mx-auto"
+          color="deep-purple accent-4"
+          indeterminate
+          height="6"
+          rounded
+        ></v-progress-linear>
+      </v-col>
+    </v-row>
     <!-- list items -->
     <v-list-item
       v-for="(hero) in currentPageHeroes"
@@ -29,7 +51,7 @@
 <script>
 import HeroDetail from "../HeroDetails/index";
 import Pagination from "./_subs/Pagination";
-import {mapState} from 'vuex'
+import { mapState } from "vuex";
 
 export default {
   name: "Heroes",
@@ -44,8 +66,8 @@ export default {
     };
   },
   methods: {
-    handleEditing(isEditing){
-      this.editing = isEditing
+    handleEditing(isEditing) {
+      this.editing = isEditing;
     },
     selectHero(hero) {
       if (!this.editing) {
@@ -58,7 +80,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['heroes', 'pagination']),
+    ...mapState(["heroes", "pagination"]),
     currentPageHeroes() {
       // where to slice : currentPage - 1 * nbItemsPerPage
       let startSlice =

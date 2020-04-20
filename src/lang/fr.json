@@ -3,5 +3,6 @@
   "details": "Détails de {name}",
   "yes": "Oui",
   "no": "Non",
+  "loading":"Chargement",
   "confirmationDelete": "Vous allez supprimer le héros. Continuer ?"
 }
