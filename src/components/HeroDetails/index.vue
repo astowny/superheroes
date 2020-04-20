@@ -40,6 +40,8 @@
 <script>
 import { mapGetters } from "vuex";
 import DeleteDialog from "./_subs/deleteDialog";
+import {UPDATE_HERO, DELETE_HERO} from '../../store/mutations-types'
+import { GET_HERO_BY_ID } from "../../store/getters-type";
 
 export default {
   name: "HeroDetail",
@@ -67,7 +69,7 @@ export default {
     },
     save() {
       // save in store
-      this.$store.commit("updateHero", this.cachedHero);
+      this.$store.commit(UPDATE_HERO, this.cachedHero);
       // .
       this.$nextTick(() => {
         // Add the component back in
@@ -76,14 +78,14 @@ export default {
       });
     },
     deleteHero() {
-      this.$store.commit("deleteHero", this.heroId);
+      this.$store.commit(DELETE_HERO, this.heroId);
       this.$emit("deleted");
     }
   },
   computed: {
-    ...mapGetters(["getHeroById"]),
+    ...mapGetters([GET_HERO_BY_ID]),
     hero() {
-      return this.getHeroById(this.heroId);
+      return this[GET_HERO_BY_ID](this.heroId);
     }
   }
 };

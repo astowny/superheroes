@@ -1,0 +1,1 @@
+export const GET_HERO_BY_ID = 'GET_HERO_BY_ID'
