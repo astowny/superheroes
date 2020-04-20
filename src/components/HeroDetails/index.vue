@@ -1,14 +1,14 @@
 <template>
   <v-card class="mx-auto" max-width="90%" outlined>
-    <v-list-item three-line>
+    <v-list-item class="justify-start align-start d-flex">
       <!-- show details mode -->
-      <v-list-item-content>
+      <v-list-item-content class="d-flex flex-column align-start justify-start align-self-start">
         <div class="overline mb-4">{{hero.id}}</div>
-        <div v-if="!showEdit">
+        <div v-if="!editorOpen">
           <v-list-item-title class="headline overflow-bw mb-1">{{ $t('details', {name: hero.name})}}</v-list-item-title>
           <p v-if="hero.description">{{hero.description}}</p>
         </div>
-        <div v-if="showEdit">
+        <div v-if="editorOpen">
           <v-text-field v-model="cachedHero.name" dense filled label="Name"></v-text-field>
           <v-textarea v-model="cachedHero.description" dense filled label="Description"></v-textarea>
           <!-- v-textfield for img src -->
@@ -21,12 +21,12 @@
       <!-- edit mode -->
       <div class="d-flex ml-4 flex-column">
         <v-list-item-avatar color="grey" tile size="80">
-          <v-img :src="hero.thumbnail.path + '/portrait_medium.' + hero.thumbnail.extension"></v-img>
+          <v-img :src="hero.imgUrl"></v-img>
         </v-list-item-avatar>
         <v-btn @click="edit()" class="my-2">
           <v-icon>fas fa-edit</v-icon>
         </v-btn>
-        <delete-dialog @yes="deleteHero()"/>
+        <delete-dialog @yes="deleteHero()" />
       </div>
       <!-- end edit mode -->
     </v-list-item>
@@ -38,8 +38,8 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import DeleteDialog from './_subs/deleteDialog'
+import { mapGetters } from "vuex";
+import DeleteDialog from "./_subs/deleteDialog";
 
 export default {
   name: "HeroDetail",
@@ -55,35 +55,35 @@ export default {
   data() {
     return {
       cachedHero: null,
-      showEdit: false
+      editorOpen: false
     };
   },
   methods: {
     edit() {
       // copy the hero
-      if (!this.cachedHero) {
-        this.cachedHero = JSON.parse(JSON.stringify(this.hero));
-      }
-      this.showEdit = !this.showEdit;
+      this.cachedHero = JSON.parse(JSON.stringify(this.hero));
+      this.editorOpen = !this.editorOpen;
+      this.$emit('editing', this.editorOpen)
     },
     save() {
       // save in store
-      this.$store.commit('updateHero', this.cachedHero)
+      this.$store.commit("updateHero", this.cachedHero);
       // .
       this.$nextTick(() => {
-          // Add the component back in
-          this.showEdit = false;
-        });
+        // Add the component back in
+        this.editorOpen = false;
+        this.$emit('editing', this.editorOpen)
+      });
     },
     deleteHero() {
-      this.$store.commit('deleteHero', this.heroId)
-      this.$emit('deleted')
+      this.$store.commit("deleteHero", this.heroId);
+      this.$emit("deleted");
     }
   },
   computed: {
-    ...mapGetters(['getHeroById']),
+    ...mapGetters(["getHeroById"]),
     hero() {
-      return this.getHeroById(this.heroId)
+      return this.getHeroById(this.heroId);
     }
   }
 };

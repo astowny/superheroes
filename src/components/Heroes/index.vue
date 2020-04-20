@@ -2,7 +2,7 @@
   <div>
     <!-- hero details -->
     <div v-if="selectedHero" class="my-2" >
-      <hero-detail :heroId="selectedHero.id" @deleted="selectedHero = null" />
+      <hero-detail :heroId="selectedHero.id" @deleted="selectedHero = null" @editing="handleEditing" />
     </div>
     <v-alert v-if="!currentPageHeroes.length">Loading...</v-alert>
     <!-- list items -->
@@ -13,7 +13,7 @@
       @click="selectHero(hero)"
     >
       <v-list-item-avatar>
-        <v-img :src="hero.thumbnail.path + '/portrait_medium.' + hero.thumbnail.extension"></v-img>
+        <v-img :src="hero.imgUrl"></v-img>
       </v-list-item-avatar>
 
       <v-list-item-content>
@@ -39,12 +39,18 @@ export default {
   },
   data() {
     return {
-      selectedHero: null
+      selectedHero: null,
+      editing: false
     };
   },
   methods: {
+    handleEditing(isEditing){
+      this.editing = isEditing
+    },
     selectHero(hero) {
-      this.selectedHero = hero;
+      if (!this.editing) {
+        this.selectedHero = hero;
+      }
     },
     changePage: function() {
       // clear selected hero

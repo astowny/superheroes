@@ -26,7 +26,23 @@ var callApi = async function (contexte,offset = 0) {
     })
 
   if (response.status === 200 && response.data.data && response.data.data.count > 0) {
-    contexte.commit("addHeroes", {heroes:response.data.data.results})
+    let heroestmp = []; 
+    
+    response.data.data.results.forEach(hero => {
+      // has
+      console.log(hero);
+      
+      let herotmp = {
+        id: hero.id,
+        name: hero.name,
+        description: hero.description ? hero.description : '',
+        imgUrl: hero.thumbnail ? hero.thumbnail.path + '/portrait_medium.' + hero.thumbnail.extension : ''
+      }
+
+      heroestmp.push(herotmp)
+    });
+
+    contexte.commit("addHeroes", {heroes:heroestmp})
     // console.log(response.data)
   } else {
     console.log("No status 200 but error : " + response.status)
