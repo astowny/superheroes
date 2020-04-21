@@ -39,8 +39,8 @@
 <script>
 import { mapGetters } from "vuex";
 import DeleteDialog from "./_subs/deleteDialog";
-import { UPDATE_HERO, DELETE_HERO } from "../../store/mutations-types";
-import { GET_HERO_BY_ID } from "../../store/getters-type";
+import { UPDATE_HERO, DELETE_HERO } from "../../store/types/mutations-types";
+import { GET_HERO_BY_ID } from "../../store/types/getters-type";
 
 export default {
 	name: "HeroDetail",

@@ -1,4 +1,4 @@
-import {ADD_HEROES, UPDATE_HERO, DELETE_HERO} from './mutations-types'
+import {ADD_HEROES, UPDATE_HERO, DELETE_HERO} from './types/mutations-types'
 import Vue from 'vue'
 
 export default {
