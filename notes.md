@@ -6,9 +6,8 @@
 [08:08:42] Quentin: https://vuetifyjs.com/en/
 
 
-getmore heroes doesnt work in heroes
-
 error on addhero when updating imgurl
 NaN when entering string with number on addhero
 
 the style or position of the sort btn is not very pretty
+rotate the add hero btn to be a close btn

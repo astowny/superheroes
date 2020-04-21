@@ -23,8 +23,8 @@
 			</v-list-item-content>
 
 			<!-- img and buttons -->
-			<div class="d-flex ml-4 flex-column">
-				<v-list-item-avatar color="grey" tile size="80">
+			<div class="d-flex ml-4 mt-3 flex-column">
+				<v-list-item-avatar class="ma-0" color="grey" tile size="80">
 					<v-img :src="hero.imgUrl"></v-img>
 				</v-list-item-avatar>
 				<v-btn @click="edit()" class="my-2 info">

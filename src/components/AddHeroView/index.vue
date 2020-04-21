@@ -24,9 +24,6 @@
 				<v-list-item-avatar color="grey" tile size="80">
 					<v-img :src="cachedHero.imgUrl"></v-img>
 				</v-list-item-avatar>
-				<v-btn @click="close()" class="my-2 info">
-					<v-icon>fas fa-times</v-icon>
-				</v-btn>
 				<v-btn @click="submit()" color="secondary">
 					<v-icon>fas fa-save</v-icon>
 				</v-btn>
@@ -50,37 +47,23 @@ export default {
 	},
 	methods: {
 		numberRule(v) {
-			return /[0-9]+/.test(v) ?  true : this.$t("error.mustbeanumber")
+			return /^[0-9]+$/.test(v) ?  true : this.$t("error.mustbeanumber")
 		},
 		checkId(v) {
 			// is the id already taken ?
 			return !this.GET_HERO_BY_ID(parseInt(v)) || this.$t("error.idtaken");
 		},
 		submit() {
-			// this.formHasErrors = false;
-
-			// Object.keys(this.form).forEach(f => {
-			// 	if (!this.form[f]) this.formHasErrors = true;
-
-			// 	this.$refs[f].validate(true);
-			// });
-
 			if (this.$refs["heroId"].validate(true)) {
 				// save the new hero
-			
 				this.$store.commit(ADD_HEROES,{heroes: [{
 					...this.cachedHero,
-					id: Number(this.cachedHero.id)
+					id: parseInt(this.cachedHero.id)
 				}]})
-				// hero added
+				// close
 				this.IS_NOT_ADDING_HERO;
-				// sort the array
-
 			}
 		},
-		close() {
-			this.IS_NOT_ADDING_HERO;
-		}
 	},
 	computed: {
 		...mapState(['heroes']),
