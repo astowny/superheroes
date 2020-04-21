@@ -54,7 +54,7 @@ export default {
 		},
 		checkId(v) {
 			// is the id already taken ?
-			return !this.GET_HERO_BY_ID(Number(v)) || this.$t("err_id_taken");
+			return !this.GET_HERO_BY_ID(parseInt(v)) || this.$t("err_id_taken");
 		},
 		submit() {
 			// this.formHasErrors = false;

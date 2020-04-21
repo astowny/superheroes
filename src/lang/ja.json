@@ -4,5 +4,11 @@
   "yes": "Hai",
   "no": "Īe",
   "loading":"Rōdingu",
-  "confirmationDelete": "Anata wa hīrō o sakujo shimasu. Tsudzukemasu ka ?"
+  "confirmationDelete": "Anata wa hīrō o sakujo shimasu. Tsudzukemasu ka ?",
+  "hero": {
+    "idlabel": "Id",
+    "namelabel": "Namae",
+    "imgurllabel": "Gazō no URL",
+    "descriptionlabel": "Setsumei bun"
+  }
 }

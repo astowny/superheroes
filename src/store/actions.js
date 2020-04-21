@@ -1,4 +1,4 @@
-import {GET_MORE_HEROES} from './types/actions-types'
+import { GET_MORE_HEROES } from './types/actions-types'
 import callApi from '../api/api'
 
 export default {

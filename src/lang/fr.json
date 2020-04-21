@@ -4,5 +4,11 @@
   "yes": "Oui",
   "no": "Non",
   "loading":"Chargement",
-  "confirmationDelete": "Vous allez supprimer le héros. Continuer ?"
+  "confirmationDelete": "Vous allez supprimer le héros. Continuer ?",
+  "hero": {
+    "idlabel": "Id",
+    "namelabel": "Nom",
+    "imgurllabel": "URL de l'image",
+    "descriptionlabel": "Description"
+  }
 }

@@ -11,9 +11,9 @@
 				<!-- end show details without editor -->
 				<!-- editor open -->
 				<div v-else>
-					<v-text-field v-model="cachedHero.name" dense label="Name"></v-text-field>
-					<v-text-field v-model="cachedHero.imgUrl" dense label="Image Url"></v-text-field>
-					<v-textarea v-model="cachedHero.description" dense label="Description"></v-textarea>
+					<v-text-field v-model="cachedHero.name" dense :label="$t('hero.namelabel')"></v-text-field>
+					<v-text-field v-model="cachedHero.imgUrl" dense :label="$t('hero.imgurllabel')"></v-text-field>
+					<v-textarea v-model="cachedHero.description" dense :label="$t('hero.descriptionlabel')"></v-textarea>
 					<!-- v-textfield for img src -->
 					<v-btn @click="save()" color="secondary">
 						<v-icon>fas fa-save</v-icon>

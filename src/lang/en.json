@@ -4,5 +4,11 @@
   "yes": "Yes",
   "no": "No",
   "loading":"Loading",
-  "confirmationDelete": "You're going to delete the hero. Continue ?"
+  "confirmationDelete": "You're going to delete the hero. Continue ?",
+  "hero":{
+    "idlabel":"Id",
+    "namelabel":"Name",
+    "imgurllabel":"Image URL",
+    "descriptionlabel":"Description"
+  }
 }
