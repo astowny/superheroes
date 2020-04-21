@@ -5,6 +5,7 @@
   "no": "No",
   "loading":"Loading",
   "confirmationDelete": "You're going to delete the hero. Continue ?",
+  "paginationmore":"More",
   "hero":{
     "idlabel":"Id",
     "namelabel":"Name",
