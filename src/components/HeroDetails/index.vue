@@ -12,6 +12,7 @@
 				<!-- editor open -->
 				<div v-else>
 					<v-text-field v-model="cachedHero.name" dense filled label="Name"></v-text-field>
+					<v-text-field v-model="cachedHero.imgUrl" dense filled label="Image Url"></v-text-field>
 					<v-textarea v-model="cachedHero.description" dense filled label="Description"></v-textarea>
 					<!-- v-textfield for img src -->
 					<v-btn @click="save()">
