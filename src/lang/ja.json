@@ -10,5 +10,9 @@
     "namelabel": "Namae",
     "imgurllabel": "Gazō no URL",
     "descriptionlabel": "Setsumei bun"
+  },
+  "error": {
+    "mustbeanumber": "Sūjidenakereba narimasen.",
+    "idtaken": "ID wa sudeni shiyō sa rete imasu."
   }
 }

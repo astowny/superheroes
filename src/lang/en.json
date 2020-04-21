@@ -10,5 +10,9 @@
     "namelabel":"Name",
     "imgurllabel":"Image URL",
     "descriptionlabel":"Description"
-  }
+  },
+  "error": {
+    "mustbeanumber":"Must be a number.",
+    "idtaken":"ID already used."
+  } 
 }
