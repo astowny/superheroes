@@ -1,4 +1,10 @@
-import {ADD_HEROES, UPDATE_HERO, DELETE_HERO} from './types/mutations-types'
+import {
+  ADD_HEROES, 
+  UPDATE_HERO, 
+  DELETE_HERO,
+  IS_ADDING_HERO,
+  IS_NOT_ADDING_HERO
+} from './types/mutations-types'
 import Vue from 'vue'
 
 export default {
@@ -15,5 +21,11 @@ export default {
     let heroIndex = state.heroes.findIndex(h => h.id === heroId)
 
     state.heroes.splice(heroIndex, 1)
+  },
+  [IS_ADDING_HERO] (state){
+    state.isAddingHero = true
+  },
+  [IS_NOT_ADDING_HERO](state) {
+    state.isAddingHero = false
   }
 }

@@ -1,3 +1,5 @@
 export const ADD_HEROES = 'ADD_HEROES'
 export const UPDATE_HERO = 'UPDATE_HERO'
 export const DELETE_HERO = 'DELETE_HERO'
+export const IS_ADDING_HERO = 'IS_ADDING_HERO'
+export const IS_NOT_ADDING_HERO = 'IS_NOT_ADDING_HERO'

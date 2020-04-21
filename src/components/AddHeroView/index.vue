@@ -1,0 +1,94 @@
+<template>
+	<v-card class="mx-auto" max-width="90%" outlined>
+		<v-list-item class="justify-start align-start d-flex">
+			<v-list-item-content>
+				<!-- editor open -->
+				<div>
+					<v-text-field
+						ref="heroId"
+						:rules="[numberRule, checkId]"
+						v-model="cachedHero.id"
+						class="my-2"
+						:label="$t('hero.idlabel')"
+						dense
+					>{{cachedHero.id}}</v-text-field>
+					<v-text-field v-model="cachedHero.name" class="my-2" dense :label="$t('hero.namelabel')"></v-text-field>
+					<v-text-field v-model="cachedHero.imgUrl" class="my-2" dense :label="$t('hero.imgurllabel')"></v-text-field>
+					<v-textarea v-model="cachedHero.description" class="my-2" dense :label="$t('hero.descriptionlabel')"></v-textarea>
+				</div>
+				<!-- end editor open -->
+			</v-list-item-content>
+
+			<!-- img and buttons -->
+			<div class="d-flex ml-4 flex-column">
+				<v-list-item-avatar color="grey" tile size="80">
+					<v-img :src="cachedHero.imgUrl"></v-img>
+				</v-list-item-avatar>
+				<v-btn @click="close()" class="my-2 info">
+					<v-icon>fas fa-times</v-icon>
+				</v-btn>
+				<v-btn @click="submit()" color="secondary">
+					<v-icon>fas fa-save</v-icon>
+				</v-btn>
+			</div>
+			<!-- end img and buttons -->
+		</v-list-item>
+	</v-card>
+</template>
+
+<script>
+import { mapState, mapGetters, mapMutations } from "vuex";
+import { IS_NOT_ADDING_HERO, ADD_HEROES } from "../../store/types/mutations-types";
+import { GET_HERO_BY_ID } from "../../store/types/getters-types";
+
+export default {
+	data() {
+		return {
+			cachedHero: {},
+			errorMessages: ""
+		};
+	},
+	methods: {
+		numberRule(v) {
+			return /[0-9]+/.test(v) ?  true : "Has to be a number"
+		},
+		checkId(v) {
+			// is the id already taken ?
+			return !this.GET_HERO_BY_ID(Number(v)) || this.$t("err_id_taken");
+		},
+		submit() {
+			// this.formHasErrors = false;
+
+			// Object.keys(this.form).forEach(f => {
+			// 	if (!this.form[f]) this.formHasErrors = true;
+
+			// 	this.$refs[f].validate(true);
+			// });
+
+			if (this.$refs["heroId"].validate(true)) {
+				// save the new hero
+			
+				this.$store.commit(ADD_HEROES,{heroes: [{
+					...this.cachedHero,
+					id: Number(this.cachedHero.id)
+				}]})
+				// hero added
+				this.IS_NOT_ADDING_HERO;
+				// sort the array
+
+			}
+		},
+		close() {
+			this.IS_NOT_ADDING_HERO;
+		}
+	},
+	computed: {
+		...mapState(['heroes']),
+		...mapGetters([GET_HERO_BY_ID]),
+		...mapMutations([ADD_HEROES, IS_NOT_ADDING_HERO])
+	}
+};
+</script>
+
+<style>
+</style>

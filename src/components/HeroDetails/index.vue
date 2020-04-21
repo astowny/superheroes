@@ -11,11 +11,11 @@
 				<!-- end show details without editor -->
 				<!-- editor open -->
 				<div v-else>
-					<v-text-field v-model="cachedHero.name" dense filled label="Name"></v-text-field>
-					<v-text-field v-model="cachedHero.imgUrl" dense filled label="Image Url"></v-text-field>
-					<v-textarea v-model="cachedHero.description" dense filled label="Description"></v-textarea>
+					<v-text-field v-model="cachedHero.name" dense label="Name"></v-text-field>
+					<v-text-field v-model="cachedHero.imgUrl" dense label="Image Url"></v-text-field>
+					<v-textarea v-model="cachedHero.description" dense label="Description"></v-textarea>
 					<!-- v-textfield for img src -->
-					<v-btn @click="save()">
+					<v-btn @click="save()" color="secondary">
 						<v-icon>fas fa-save</v-icon>
 					</v-btn>
 				</div>
@@ -27,7 +27,7 @@
 				<v-list-item-avatar color="grey" tile size="80">
 					<v-img :src="hero.imgUrl"></v-img>
 				</v-list-item-avatar>
-				<v-btn @click="edit()" class="my-2">
+				<v-btn @click="edit()" class="my-2 info">
 					<v-icon>fas fa-edit</v-icon>
 				</v-btn>
 				<delete-dialog @yes="deleteHero()" />
@@ -41,7 +41,7 @@
 import { mapGetters } from "vuex";
 import DeleteDialog from "./_subs/deleteDialog";
 import { UPDATE_HERO, DELETE_HERO } from "../../store/types/mutations-types";
-import { GET_HERO_BY_ID } from "../../store/types/getters-type";
+import { GET_HERO_BY_ID } from "../../store/types/getters-types";
 
 export default {
 	name: "HeroDetail",

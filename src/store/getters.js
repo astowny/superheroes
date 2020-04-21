@@ -1,4 +1,4 @@
-import { GET_HERO_BY_ID } from "./types/getters-type"
+import { GET_HERO_BY_ID } from "./types/getters-types"
 
 export default {
   [GET_HERO_BY_ID]: (state) => (id) => {
