@@ -1,19 +1,42 @@
 <template>
 	<div>
 		<v-row v-if="favoriteHeroes.length && heroes.length && myHeroes.length" justify="center">
-			<v-card v-for="(myhero,i) in myHeroes" :key="'myhero-' + i" class="ma-3 pa-6 d-flex flex-column align-center favorite-card" outlined tile>
+			<v-card
+				v-for="(myhero,i) in myHeroes"
+				:key="'myhero-' + i"
+				@click="showDetails(myhero.id)"
+				class="ma-3 pa-3 d-flex flex-column align-center favorite-card"
+				outlined
+				tile
+			>
 				<v-img :src="myhero.imgUrl" width="80" height="80"></v-img>
 				{{ myhero.name }}
 			</v-card>
+		</v-row>
+		<v-row v-if="selectedHero">
+			<v-col>
+				<hero-details :heroId="selectedHero" />
+			</v-col>
 		</v-row>
 	</div>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import HeroDetails from "../HeroDetails/index";
 export default {
+	components: {
+		HeroDetails
+	},
 	data() {
-		return {};
+		return {
+			selectedHero: 0
+		};
+	},
+	methods: {
+		showDetails(id) {
+			this.selectedHero = id;
+		}
 	},
 	computed: {
 		...mapState(["favoriteHeroes", "heroes"]),
@@ -30,6 +53,6 @@ export default {
 
 <style scoped>
 .favorite-card {
-  flex: 0 1 180px
+	flex: 0 1 180px;
 }
 </style>
