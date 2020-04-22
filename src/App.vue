@@ -5,15 +5,37 @@
 				<v-row align="center" justify="center">
 					<v-col cols="12" sm="8" md="6">
 						<v-card class="elevation-12">
-							<v-toolbar color="primary" dark flat height="80">
-								<v-toolbar-title>{{ $t("title") }}</v-toolbar-title>
-								<v-spacer></v-spacer>
-								<change-locale></change-locale>
-								<btn-add-hero @addHero="isAddingHero = true"/>
+							<v-toolbar class="d-flex flex-column" height="130" color="primary" dark flat>
+								<btn-add-hero @addHero="isAddingHero = true" class="elevation-2" />
+								<div class="d-flex flex-column align-center w-full">
+									<div class="d-flex align-center w-full">
+										<v-toolbar-title>{{ $t("title") }}</v-toolbar-title>
+										<v-spacer></v-spacer>
+										<change-locale></change-locale>
+									</div>
+									<v-tabs v-model="tab" background-color="primary" dark>
+										<v-tabs-slider></v-tabs-slider>
+
+										<v-tab href="#favorites">
+											<v-icon class="mr-2">fas fa-heart</v-icon>Favorites
+										</v-tab>
+
+										<v-tab href="#all">
+											<v-icon class="mr-2">fas fa-user-secret</v-icon>All
+										</v-tab>
+									</v-tabs>
+								</div>
 							</v-toolbar>
 							<div class="py-6 grey lighten-2">
-								<add-hero-view v-if="isAddingHero"/>
-								<heroes v-else />
+								<add-hero-view v-if="isAddingHero" />
+								<v-tabs-items v-else class="grey lighten-2" v-model="tab">
+									<v-tab-item value="favorites">
+										<favorites />
+									</v-tab-item>
+									<v-tab-item value="all">
+										<heroes />
+									</v-tab-item>
+								</v-tabs-items>
 							</div>
 						</v-card>
 					</v-col>
@@ -28,7 +50,8 @@ import Heroes from "./components/Heroes/index";
 import ChangeLocale from "./components/ChangeLocale";
 import BtnAddHero from "./components/BtnAddHero/index";
 import AddHeroView from "./components/AddHeroView";
-import {mapState} from 'vuex'
+import Favorites from "./components/Favorites/index";
+import { mapState } from "vuex";
 
 export default {
 	name: "SuperherosApp",
@@ -36,14 +59,20 @@ export default {
 		Heroes,
 		ChangeLocale,
 		BtnAddHero,
-		AddHeroView
+		AddHeroView,
+		Favorites
 	},
-	data: () => ({}),
+	data: () => ({
+			tab: null,
+	}),
 	computed: {
-		...mapState(['isAddingHero'])
+		...mapState(["isAddingHero"])
 	}
 };
 </script>
 
 <style scoped>
+.w-full {
+	width: 100%;
+}
 </style>

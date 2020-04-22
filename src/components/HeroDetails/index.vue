@@ -30,6 +30,11 @@
 				<v-btn @click="edit()" class="my-2 info">
 					<v-icon>fas fa-edit</v-icon>
 				</v-btn>
+				<v-btn @click="addToFavorites()" class="mb-2 success">
+					<v-icon>
+						fas fa-star
+					</v-icon>
+				</v-btn>
 				<delete-dialog @yes="deleteHero()" />
 			</div>
 			<!-- end img and buttons -->
@@ -40,7 +45,7 @@
 <script>
 import { mapGetters } from "vuex";
 import DeleteDialog from "./_subs/deleteDialog";
-import { UPDATE_HERO, DELETE_HERO } from "../../store/types/mutations-types";
+import { UPDATE_HERO, DELETE_HERO, ADD_TO_FAVORITES } from "../../store/types/mutations-types";
 import { GET_HERO_BY_ID } from "../../store/types/getters-types";
 
 export default {
@@ -80,6 +85,9 @@ export default {
 		deleteHero() {
 			this.$store.commit(DELETE_HERO, this.heroId);
 			this.$emit("deleted");
+		},
+		addToFavorites(){
+			this.$store.commit(ADD_TO_FAVORITES, this.heroId)
 		}
 	},
 	computed: {

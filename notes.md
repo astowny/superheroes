@@ -11,3 +11,6 @@ NaN when entering string with number on addhero
 
 the style or position of the sort btn is not very pretty
 rotate the add hero btn to be a close btn
+
+in favorites
+when click show details

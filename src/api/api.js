@@ -41,5 +41,6 @@ export default async function (contexte, offset = 0) {
     // console.log(response.data)
   } else {
     console.log("No status 200 but error : " + response.status)
+    
   }
 }

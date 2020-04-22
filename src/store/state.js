@@ -1,4 +1,5 @@
 export default {
   heroes:[],
-  isAddingHero:false
+  isAddingHero:false,
+  favoriteHeroes: []
 }
