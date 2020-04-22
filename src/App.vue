@@ -50,19 +50,21 @@
 							</v-row>
 							<!-- end loading -->
 							<!-- content -->
-							<hero-details v-if="selectedHero" :heroId="selectedHero" @deleted="close()" />
-							<div v-else class="py-6 grey lighten-2 relative">
-								<btn-add-hero @addHero="isAddingHero = true" class="elevation-2" />
-								<add-hero-view v-if="isAddingHero" class="py-6 grey lighten-2" />
-								<!-- tabs content -->
-								<v-tabs-items v-else class="grey lighten-2" v-model="tab">
-									<v-tab-item value="favorites">
-										<favorites />
-									</v-tab-item>
-									<v-tab-item value="all">
-										<heroes />
-									</v-tab-item>
-								</v-tabs-items>
+							<div v-else class="relative">
+								<hero-details v-if="selectedHero" @deleted="close()" :heroId="selectedHero" class="pt-6" />
+								<div v-else class="py-6 grey lighten-2 relative">
+									<btn-add-hero @addHero="isAddingHero = true" class="elevation-2" />
+									<add-hero-view v-if="isAddingHero" class="py-6 grey lighten-2" />
+									<!-- tabs content -->
+									<v-tabs-items v-else class="grey lighten-2" v-model="tab">
+										<v-tab-item value="favorites">
+											<favorites />
+										</v-tab-item>
+										<v-tab-item value="all">
+											<heroes />
+										</v-tab-item>
+									</v-tabs-items>
+								</div>
 								<!-- end tabs content -->
 							</div>
 							<!-- end content -->

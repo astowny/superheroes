@@ -10,10 +10,4 @@ error on addhero when updating imgurl
 
 the style or position of the sort btn is not very pretty
 
-the show detqils stays open in the tab favorites
-
-notifications
-// when heroe added
-// notify = show 
-
-on change close show details (selectedhero = 0)
+notification refresh when other notificatino comes
