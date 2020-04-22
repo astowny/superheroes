@@ -6,6 +6,8 @@
   "loading":"Loading",
   "confirmationDelete": "You're going to delete the hero. Continue ?",
   "paginationmore":"More",
+  "favoritestab":"Favorites",
+  "alltab":"All",
   "hero":{
     "idlabel":"Id",
     "namelabel":"Name",

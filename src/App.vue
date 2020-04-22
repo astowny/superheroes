@@ -17,11 +17,11 @@
 										<v-tabs-slider></v-tabs-slider>
 
 										<v-tab href="#favorites">
-											<v-icon class="mr-2">fas fa-heart</v-icon>Favorites
+											<v-icon class="mr-2">fas fa-heart</v-icon>{{$t('favoritestab')}}
 										</v-tab>
 
 										<v-tab href="#all">
-											<v-icon class="mr-2">fas fa-user-secret</v-icon>All
+											<v-icon class="mr-2">fas fa-user-secret</v-icon>{{$t('alltab')}}
 										</v-tab>
 									</v-tabs>
 								</div>

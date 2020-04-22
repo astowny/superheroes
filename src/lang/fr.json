@@ -6,6 +6,8 @@
   "loading":"Chargement",
   "confirmationDelete": "Vous allez supprimer le héros. Continuer ?",
   "paginationmore": "Plus",
+  "favoritestab": "Favoris",
+  "alltab": "Tous",
   "hero": {
     "idlabel": "Id",
     "namelabel": "Nom",
