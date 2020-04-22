@@ -1,33 +1,6 @@
 <template>
 	<div class="py-3 grey lighten-2">
-		<!-- hero details -->
-		<!-- <div v-if="selectedHero">
-			<hero-detail
-				:heroId="selectedHero.id"
-				@deleted="selectedHero = null"
-				@editing="handleEditing"
-				class="mb-2"
-			/>
-			<v-divider></v-divider>
-		</div> -->
-		<!-- loading -->
-		<v-row
-			v-if="!currentPageHeroes.length"
-			class="fill-height mt-2"
-			align-content="center"
-			justify="center"
-		>
-			<v-col class="text-center" cols="6">
-				{{$t('loading')}}
-				<v-progress-linear
-					class="mx-auto"
-					color="deep-purple accent-4"
-					indeterminate
-					height="6"
-					rounded
-				></v-progress-linear>
-			</v-col>
-		</v-row>
+		<!-- content -->
 		<div>
 			<!-- btn sort -->
 			<div class="d-flex justify-center">
@@ -55,9 +28,10 @@
 				</v-list-item-content>
 			</v-list-item>
 			<!--  pagination  -->
-			<pagination :heroes="heroes" @input="changePage" />
+			<pagination :heroes="heroes"/>
 			<!-- btn moreheroes -->
 		</div>
+		<!-- end content -->
 	</div>
 </template>
 
@@ -71,24 +45,9 @@ export default {
 	components: {
 		Pagination
 	},
-	data() {
-		return {
-			selectedHero: null,
-			editing: false
-		};
-	},
 	methods: {
-		handleEditing(isEditing) {
-			this.editing = isEditing;
-		},
 		selectHero(hero) {
-			if (!this.editing) {
 				this.$store.commit(SET_SELECTED_HERO, hero.id)
-			}
-		},
-		changePage: function() {
-			// clear selected hero
-			this.selectedHero = "";
 		}
 	},
 	computed: {

@@ -5,7 +5,7 @@
 				<v-row align="center" justify="center">
 					<v-col cols="12" sm="8" md="6">
 						<!-- card of my App -->
-						<v-card class="elevation-12">
+						<v-card class="elevation-12 grey lighten-2">
 							<!-- notification -->
 							<notification />
 							<!-- toolbar -->
@@ -30,8 +30,27 @@
 								<!-- end tabs -->
 							</v-toolbar>
 							<!-- end toolbar -->
+							<!-- loading -->
+							<v-row
+								v-if="!heroes.length"
+								class="fill-height mt-2"
+								align-content="center"
+								justify="center"
+							>
+								<v-col class="text-center" cols="6">
+									{{$t('loading')}}
+									<v-progress-linear
+										class="mx-auto"
+										color="deep-purple accent-4"
+										indeterminate
+										height="6"
+										rounded
+									></v-progress-linear>
+								</v-col>
+							</v-row>
+							<!-- end loading -->
 							<!-- content -->
-							<hero-details v-if="selectedHero" :heroId="selectedHero" @deleted="close()"/>
+							<hero-details v-if="selectedHero" :heroId="selectedHero" @deleted="close()" />
 							<div v-else class="py-6 grey lighten-2 relative">
 								<btn-add-hero @addHero="isAddingHero = true" class="elevation-2" />
 								<add-hero-view v-if="isAddingHero" class="py-6 grey lighten-2" />
@@ -65,7 +84,7 @@ import AddHeroView from "./components/AddHeroView";
 import Favorites from "./components/Favorites/index";
 import Notification from "./components/Notification/index";
 import { mapState } from "vuex";
-import { SET_SELECTED_HERO } from './store/types/mutations-types';
+import { SET_SELECTED_HERO } from "./store/types/mutations-types";
 
 export default {
 	name: "SuperherosApp",
@@ -79,15 +98,15 @@ export default {
 		HeroDetails
 	},
 	data: () => ({
-		tab: null,
+		tab: null
 	}),
 	methods: {
 		close() {
-			this.$store.commit(SET_SELECTED_HERO, null)
+			this.$store.commit(SET_SELECTED_HERO, null);
 		}
 	},
 	computed: {
-		...mapState(["isAddingHero", "notify", "selectedHero"]),
+		...mapState(["isAddingHero", "notify", "selectedHero", "heroes"])
 	}
 };
 </script>
