@@ -1,5 +1,5 @@
 <template v-slot:extension>
-	<v-btn @click="addHeroOrClose()" :class="{active: isAddingHero}" color="secondary" dark small absolute bottom right fab>
+	<v-btn @click="addHeroOrClose()" :class="{active: isAddingHero}" :color="isAddingHero ? 'info' : 'secondary'" dark small absolute top right fab>
 		<v-icon>fas fa-plus</v-icon>
 	</v-btn>
 </template>

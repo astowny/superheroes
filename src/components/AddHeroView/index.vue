@@ -15,6 +15,9 @@
 					<v-text-field v-model="cachedHero.name" class="my-2" dense :label="$t('hero.namelabel')"></v-text-field>
 					<v-text-field v-model="cachedHero.imgUrl" class="my-2" dense :label="$t('hero.imgurllabel')"></v-text-field>
 					<v-textarea v-model="cachedHero.description" class="my-2" dense :label="$t('hero.descriptionlabel')"></v-textarea>
+					<v-btn @click="submit()" color="secondary">
+					<v-icon>fas fa-save</v-icon>
+				</v-btn>
 				</div>
 				<!-- end editor open -->
 			</v-list-item-content>
@@ -24,9 +27,6 @@
 				<v-list-item-avatar color="grey" tile size="80">
 					<v-img :src="cachedHero.imgUrl"></v-img>
 				</v-list-item-avatar>
-				<v-btn @click="submit()" color="secondary">
-					<v-icon>fas fa-save</v-icon>
-				</v-btn>
 			</div>
 			<!-- end img and buttons -->
 		</v-list-item>

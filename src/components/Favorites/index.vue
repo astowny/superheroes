@@ -1,17 +1,18 @@
 <template>
 	<div>
 		<v-row v-if="favoriteHeroes.length && heroes.length && myHeroes.length" justify="center">
-			<v-card
-				v-for="(myhero,i) in myHeroes"
-				:key="'myhero-' + i"
-				@click="showDetails(myhero.id)"
-				class="ma-3 pa-3 d-flex flex-column align-center favorite-card"
-				outlined
-				tile
-			>
-				<v-img :src="myhero.imgUrl" width="80" height="80"></v-img>
-				{{ myhero.name }}
-			</v-card>
+			<v-hover v-for="(myhero,i) in myHeroes" :key="'myhero-' + i" v-slot:default="{ hover }">
+				<v-card
+					@click="showDetails(myhero.id)"
+					class="ma-3 pa-3 d-flex flex-column align-center favorite-card"
+          :elevation="hover ? 12 : 2"
+					outlined
+					tile
+				>
+					<v-img :src="myhero.imgUrl" width="80" height="80"></v-img>
+					{{ myhero.name }}
+				</v-card>
+			</v-hover>
 		</v-row>
 		<v-row v-if="selectedHero">
 			<v-col>
@@ -35,7 +36,7 @@ export default {
 	},
 	methods: {
 		showDetails(id) {
-			this.selectedHero = id;
+      this.selectedHero = id;
 		}
 	},
 	computed: {

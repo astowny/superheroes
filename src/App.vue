@@ -5,29 +5,27 @@
 				<v-row align="center" justify="center">
 					<v-col cols="12" sm="8" md="6">
 						<v-card class="elevation-12">
-							<v-toolbar class="d-flex flex-column" height="130" color="primary" dark flat>
-								<btn-add-hero @addHero="isAddingHero = true" class="elevation-2" />
-								<div class="d-flex flex-column align-center w-full">
-									<div class="d-flex align-center w-full">
-										<v-toolbar-title>{{ $t("title") }}</v-toolbar-title>
-										<v-spacer></v-spacer>
-										<change-locale></change-locale>
-									</div>
+							<v-toolbar color="primary" dark flat>
+								<v-toolbar-title>{{ $t("title") }}</v-toolbar-title>
+								<v-spacer></v-spacer>
+								<change-locale></change-locale>
+								<template v-slot:extension class="py-6 grey lighten-2">
 									<v-tabs v-model="tab" background-color="primary" dark>
-										<v-tabs-slider></v-tabs-slider>
-
 										<v-tab href="#favorites">
-											<v-icon class="mr-2">fas fa-heart</v-icon>{{$t('favoritestab')}}
+											<v-icon class="mr-2">fas fa-heart</v-icon>
+											{{$t('favoritestab')}}
 										</v-tab>
 
 										<v-tab href="#all">
-											<v-icon class="mr-2">fas fa-user-secret</v-icon>{{$t('alltab')}}
+											<v-icon class="mr-2">fas fa-user-secret</v-icon>
+											{{$t('alltab')}}
 										</v-tab>
 									</v-tabs>
-								</div>
+								</template>
 							</v-toolbar>
-							<div class="py-6 grey lighten-2">
-								<add-hero-view v-if="isAddingHero" />
+							<div class="py-6 grey lighten-2 relative">
+								<btn-add-hero @addHero="isAddingHero = true" class="elevation-2" />
+								<add-hero-view v-if="isAddingHero" class="py-6 grey lighten-2" />
 								<v-tabs-items v-else class="grey lighten-2" v-model="tab">
 									<v-tab-item value="favorites">
 										<favorites />
@@ -63,7 +61,7 @@ export default {
 		Favorites
 	},
 	data: () => ({
-			tab: null,
+		tab: null
 	}),
 	computed: {
 		...mapState(["isAddingHero"])
@@ -75,4 +73,5 @@ export default {
 .w-full {
 	width: 100%;
 }
+.relative{position: relative;}
 </style>
