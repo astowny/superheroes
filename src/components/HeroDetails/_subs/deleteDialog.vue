@@ -1,5 +1,5 @@
 <template>
-	<div class="d-flex flex-column my-2">
+	<div class="d-flex flex-column">
 		<v-dialog v-model="dialog" width="500">
 			<template v-slot:activator="{ on }">
 				<v-btn color="red" dark v-on="on">

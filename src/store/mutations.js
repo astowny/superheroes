@@ -5,7 +5,8 @@ import {
   IS_ADDING_HERO,
   IS_NOT_ADDING_HERO,
   SORT_HEROES_BY_NAME,
-  ADD_TO_FAVORITES
+  ADD_TO_FAVORITES,
+  SET_SELECTED_HERO,
 } from './types/mutations-types'
 import Vue from 'vue'
 
@@ -48,12 +49,15 @@ export default {
     state.heroes.sort(compare);
   },
   [ADD_TO_FAVORITES] (state, heroId) {
-    if (state.favoriteHeroes.indexOf(heroId) === -1) {
-      state.favoriteHeroes.unshift(heroId)
+    if (state.favoriteHeroesId.indexOf(heroId) === -1) {
+      state.favoriteHeroesId.unshift(heroId)
     }
 
-    if (state.favoriteHeroes.length > 6) {
-      state.favoriteHeroes.pop()
+    if (state.favoriteHeroesId.length > 6) {
+      state.favoriteHeroesId.pop()
     }
+  },
+  [SET_SELECTED_HERO] (state, heroid) {
+    state.selectedHero = heroid
   }
 }

@@ -1,7 +1,7 @@
 <template>
 	<div class="py-3 grey lighten-2">
 		<!-- hero details -->
-		<div v-if="selectedHero">
+		<!-- <div v-if="selectedHero">
 			<hero-detail
 				:heroId="selectedHero.id"
 				@deleted="selectedHero = null"
@@ -9,7 +9,7 @@
 				class="mb-2"
 			/>
 			<v-divider></v-divider>
-		</div>
+		</div> -->
 		<!-- loading -->
 		<v-row
 			v-if="!currentPageHeroes.length"
@@ -62,15 +62,13 @@
 </template>
 
 <script>
-import HeroDetail from "../HeroDetails/index";
 import Pagination from "./_subs/Pagination";
 import { mapState, mapMutations } from "vuex";
-import { SORT_HEROES_BY_NAME } from "../../store/types/mutations-types";
+import { SORT_HEROES_BY_NAME, SET_SELECTED_HERO } from "../../store/types/mutations-types";
 
 export default {
 	name: "Heroes",
 	components: {
-		HeroDetail,
 		Pagination
 	},
 	data() {
@@ -85,7 +83,7 @@ export default {
 		},
 		selectHero(hero) {
 			if (!this.editing) {
-				this.selectedHero = hero;
+				this.$store.commit(SET_SELECTED_HERO, hero.id)
 			}
 		},
 		changePage: function() {

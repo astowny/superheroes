@@ -1,5 +1,5 @@
 <template>
-	<v-card class="mx-auto" max-width="90%" outlined>
+	<v-card class="mx-auto grey lighten-2">
 		<v-list-item class="justify-start align-start d-flex">
 			<v-list-item-content>
 				<div class="overline mb-4">{{hero.id}}</div>
@@ -14,9 +14,12 @@
 					<v-text-field v-model="cachedHero.name" dense :label="$t('hero.namelabel')"></v-text-field>
 					<v-text-field v-model="cachedHero.imgUrl" dense :label="$t('hero.imgurllabel')"></v-text-field>
 					<v-textarea v-model="cachedHero.description" dense :label="$t('hero.descriptionlabel')"></v-textarea>
-					<!-- v-textfield for img src -->
+					<!-- btns -->
 					<v-btn @click="save()" color="secondary">
 						<v-icon>fas fa-save</v-icon>
+					</v-btn>
+					<v-btn @click="back()" class="ml-4" text color="purple darken-1">
+						<v-icon>fas fa-backspace</v-icon>
 					</v-btn>
 				</div>
 				<!-- end editor open -->
@@ -31,11 +34,10 @@
 					<v-icon>fas fa-edit</v-icon>
 				</v-btn>
 				<v-btn @click="addToFavorites()" class="mb-2 success">
-					<v-icon>
-						fas fa-star
-					</v-icon>
+					<v-icon>fas fa-star</v-icon>
 				</v-btn>
-				<delete-dialog @yes="deleteHero()" />
+				<delete-dialog @yes="deleteHero()"  class="mb-2"/>
+				<v-btn @click="closeWindow()"  class="mb-3 secondary"><v-icon>fas fa-times</v-icon></v-btn>
 			</div>
 			<!-- end img and buttons -->
 		</v-list-item>
@@ -43,9 +45,14 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 import DeleteDialog from "./_subs/deleteDialog";
-import { UPDATE_HERO, DELETE_HERO, ADD_TO_FAVORITES } from "../../store/types/mutations-types";
+import {
+	UPDATE_HERO,
+	DELETE_HERO,
+	ADD_TO_FAVORITES,
+	SET_SELECTED_HERO
+} from "../../store/types/mutations-types";
 import { GET_HERO_BY_ID } from "../../store/types/getters-types";
 
 export default {
@@ -66,6 +73,10 @@ export default {
 		};
 	},
 	methods: {
+		closeWindow() {
+			// closeWindow the window
+			this.$store.commit(SET_SELECTED_HERO, null)
+		},
 		edit() {
 			// copy the hero
 			this.cachedHero = JSON.parse(JSON.stringify(this.hero));
@@ -80,17 +91,37 @@ export default {
 				// Add the component back in
 				this.editorOpen = false;
 				this.$emit("editing", this.editorOpen);
+				this.$store.commit("setNotification", true);
+				this.$store.commit("setText", "Hero saved.");
+				this.$store.commit("setColor", "success");
 			});
+		},
+		back() {
+			// close editing
+			this.editorOpen = false
 		},
 		deleteHero() {
 			this.$store.commit(DELETE_HERO, this.heroId);
 			this.$emit("deleted");
+			this.$store.commit("setNotification", true);
+			this.$store.commit("setText", "Hero deleted.");
+			this.$store.commit("setColor", "success");
 		},
-		addToFavorites(){
-			this.$store.commit(ADD_TO_FAVORITES, this.heroId)
+		addToFavorites() {
+			if (this.favoriteHeroesId.indexOf(this.heroId) === -1) {
+				this.$store.commit(ADD_TO_FAVORITES, this.heroId);
+				this.$store.commit("setNotification", true);
+				this.$store.commit("setText", "Added to favorites.");
+				this.$store.commit("setColor", "success");
+			} else {
+				this.$store.commit("setNotification", true);
+				this.$store.commit("setText", "Already in favorites.");
+				this.$store.commit("setColor", "error");
+			}
 		}
 	},
 	computed: {
+		...mapState(["favoriteHeroesId"]),
 		...mapGetters([GET_HERO_BY_ID]),
 		hero() {
 			return this[GET_HERO_BY_ID](this.heroId);

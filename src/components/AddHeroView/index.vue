@@ -62,6 +62,10 @@ export default {
 				}]})
 				// close
 				this.IS_NOT_ADDING_HERO;
+				// notify
+				this.$store.commit("setNotification", true);
+				this.$store.commit("setText", "Hero added successfully.");
+				this.$store.commit("setColor", "success");
 			}
 		},
 	},

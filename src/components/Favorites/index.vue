@@ -1,11 +1,12 @@
 <template>
 	<div>
-		<v-row v-if="favoriteHeroes.length && heroes.length && myHeroes.length" justify="center">
+		<v-row v-if="favoriteHeroesId.length && heroes.length && myHeroes.length" justify="center">
 			<v-hover v-for="(myhero,i) in myHeroes" :key="'myhero-' + i" v-slot:default="{ hover }">
 				<v-card
+					v-if="myhero !== undefined"
 					@click="showDetails(myhero.id)"
 					class="ma-3 pa-3 d-flex flex-column align-center favorite-card"
-          :elevation="hover ? 12 : 2"
+					:elevation="hover ? 12 : 2"
 					outlined
 					tile
 				>
@@ -14,36 +15,27 @@
 				</v-card>
 			</v-hover>
 		</v-row>
-		<v-row v-if="selectedHero">
-			<v-col>
-				<hero-details :heroId="selectedHero" />
-			</v-col>
-		</v-row>
 	</div>
 </template>
 
 <script>
 import { mapState } from "vuex";
-import HeroDetails from "../HeroDetails/index";
+import { SET_SELECTED_HERO } from "../../store/types/mutations-types";
+
 export default {
-	components: {
-		HeroDetails
-	},
 	data() {
-		return {
-			selectedHero: 0
-		};
+		return {};
 	},
 	methods: {
 		showDetails(id) {
-      this.selectedHero = id;
+			this.$store.commit(SET_SELECTED_HERO, id);
 		}
 	},
 	computed: {
-		...mapState(["favoriteHeroes", "heroes"]),
+		...mapState(["favoriteHeroesId", "heroes"]),
 		myHeroes() {
 			let tmpMyHeroes = [];
-			this.favoriteHeroes.forEach(heroId => {
+			this.favoriteHeroesId.forEach(heroId => {
 				tmpMyHeroes.push(this.heroes.find(h => h.id === heroId));
 			});
 			return tmpMyHeroes;

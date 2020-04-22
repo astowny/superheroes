@@ -7,10 +7,13 @@
 
 
 error on addhero when updating imgurl
-NaN when entering string with number on addhero
 
 the style or position of the sort btn is not very pretty
-rotate the add hero btn to be a close btn
 
-in favorites
-when click show details
+the show detqils stays open in the tab favorites
+
+notifications
+// when heroe added
+// notify = show 
+
+on change close show details (selectedhero = 0)
