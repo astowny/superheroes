@@ -15,7 +15,7 @@
 								<change-locale></change-locale>
 								<template v-slot:extension class="py-6 grey lighten-2">
 									<!-- tabs -->
-									<v-tabs v-model="tab" background-color="primary" dark>
+									<v-tabs @change="close()" v-model="tab" background-color="primary" dark>
 										<v-tab href="#favorites">
 											<v-icon class="mr-2">fas fa-heart</v-icon>
 											{{$t('favoritestab')}}
