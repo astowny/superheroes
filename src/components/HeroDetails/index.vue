@@ -4,13 +4,13 @@
 			<v-list-item-content>
 				<div class="overline mb-4">{{hero.id}}</div>
 				<!-- show details without editor -->
-				<div v-if="!editorOpen" class="align-self-start">
+				<div v-if="stateApp !== 'EDIT'" class="align-self-start">
 					<v-list-item-title class="headline overflow-bw mb-1">{{ $t('details', {name: hero.name})}}</v-list-item-title>
 					<p v-if="hero.description" class="text-justify">{{hero.description}}</p>
 				</div>
 				<!-- end show details without editor -->
 				<!-- editor open -->
-				<div v-else>
+				<div v-else-if="stateApp === 'EDIT' && cachedHero != null">
 					<v-text-field v-model="cachedHero.name" dense :label="$t('hero.namelabel')"></v-text-field>
 					<v-text-field v-model="cachedHero.imgUrl" dense :label="$t('hero.imgurllabel')"></v-text-field>
 					<v-textarea v-model="cachedHero.description" dense :label="$t('hero.descriptionlabel')"></v-textarea>
@@ -36,8 +36,10 @@
 				<v-btn @click="addToFavorites()" class="mb-2 success">
 					<v-icon>fas fa-star</v-icon>
 				</v-btn>
-				<delete-dialog @yes="deleteHero()"  class="mb-2"/>
-				<v-btn @click="closeWindow()"  class="mb-3 secondary"><v-icon>fas fa-times</v-icon></v-btn>
+				<delete-dialog @yes="deleteHero()" class="mb-2" />
+				<v-btn @click="closeWindow()" class="mb-3 secondary">
+					<v-icon>fas fa-times</v-icon>
+				</v-btn>
 			</div>
 			<!-- end img and buttons -->
 		</v-list-item>
@@ -51,7 +53,8 @@ import {
 	UPDATE_HERO,
 	DELETE_HERO,
 	ADD_TO_FAVORITES,
-	SET_SELECTED_HERO
+	SET_SELECTED_HERO,
+	SET_STATE_APP
 } from "../../store/types/mutations-types";
 import { GET_HERO_BY_ID } from "../../store/types/getters-types";
 
@@ -68,20 +71,19 @@ export default {
 	},
 	data() {
 		return {
-			cachedHero: null,
-			editorOpen: false
+			cachedHero: null
 		};
 	},
 	methods: {
 		closeWindow() {
 			// closeWindow the window
-			this.$store.commit(SET_SELECTED_HERO, null)
+			this.$store.commit(SET_SELECTED_HERO, null);
+			this.$store.commit(SET_STATE_APP, "");
 		},
 		edit() {
 			// copy the hero
 			this.cachedHero = JSON.parse(JSON.stringify(this.hero));
-			this.editorOpen = !this.editorOpen;
-			this.$emit("editing", this.editorOpen);
+			this.$store.commit(SET_STATE_APP, "EDIT");
 		},
 		save() {
 			// save in store
@@ -89,8 +91,7 @@ export default {
 			// .
 			this.$nextTick(() => {
 				// Add the component back in
-				this.editorOpen = false;
-				this.$emit("editing", this.editorOpen);
+				this.$store.commit(SET_STATE_APP, "");
 				this.$store.commit("setNotification", true);
 				this.$store.commit("setText", "Hero saved.");
 				this.$store.commit("setColor", "success");
@@ -98,7 +99,7 @@ export default {
 		},
 		back() {
 			// close editing
-			this.editorOpen = false
+			this.$store.commit(SET_STATE_APP, "");
 		},
 		deleteHero() {
 			this.$store.commit(DELETE_HERO, this.heroId);
@@ -121,7 +122,7 @@ export default {
 		}
 	},
 	computed: {
-		...mapState(["favoriteHeroesId"]),
+		...mapState(["favoriteHeroesId", "stateApp"]),
 		...mapGetters([GET_HERO_BY_ID]),
 		hero() {
 			return this[GET_HERO_BY_ID](this.heroId);

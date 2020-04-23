@@ -34,8 +34,8 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from "vuex";
-import { IS_NOT_ADDING_HERO, ADD_HEROES } from "../../store/types/mutations-types";
+import { mapState, mapGetters } from "vuex";
+import { SET_STATE_APP, ADD_HEROES } from "../../store/types/mutations-types";
 import { GET_HERO_BY_ID } from "../../store/types/getters-types";
 
 export default {
@@ -61,7 +61,7 @@ export default {
 					id: parseInt(this.cachedHero.id)
 				}]})
 				// close
-				this.IS_NOT_ADDING_HERO;
+				this.$store.commit(SET_STATE_APP, '');
 				// notify
 				this.$store.commit("setNotification", true);
 				this.$store.commit("setText", "Hero added successfully.");
@@ -71,8 +71,7 @@ export default {
 	},
 	computed: {
 		...mapState(['heroes']),
-		...mapGetters([GET_HERO_BY_ID]),
-		...mapMutations([ADD_HEROES, IS_NOT_ADDING_HERO])
+		...mapGetters([GET_HERO_BY_ID])
 	}
 };
 </script>

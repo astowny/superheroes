@@ -1,27 +1,25 @@
 <template v-slot:extension>
-	<v-btn @click="addHeroOrClose()" :class="{active: isAddingHero}" :color="isAddingHero ? 'info' : 'secondary'" dark small absolute top right fab>
+	<v-btn @click="addHeroOrClose()" :class="{active: stateApp}" :color="stateApp ? 'info' : 'secondary'" dark small absolute top right fab>
 		<v-icon>fas fa-plus</v-icon>
 	</v-btn>
 </template>
 
 <script>
-import { IS_ADDING_HERO, IS_NOT_ADDING_HERO } from '../../store/types/mutations-types'
+import { SET_STATE_APP } from '../../store/types/mutations-types'
 import { mapState } from 'vuex'
 
 export default {
   methods:{
     addHeroOrClose() {
-      if (!this.isAddingHero){
-        this.$store.commit(IS_ADDING_HERO)
+      if (!this.stateApp){
+        this.$store.commit(SET_STATE_APP, 'ADD')
       } else {
-        this.$store.commit(IS_NOT_ADDING_HERO)
+        this.$store.commit(SET_STATE_APP, '')
       }
     }
   },
   computed: {
-    ...mapState({
-      isAddingHero: state => state.isAddingHero
-    })
+    ...mapState(['stateApp'])
   }
 }
 </script>

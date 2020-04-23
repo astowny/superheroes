@@ -11,3 +11,5 @@ error on addhero when updating imgurl
 the style or position of the sort btn is not very pretty
 
 notification refresh when other notificatino comes
+
+make a state for editing AND adding 

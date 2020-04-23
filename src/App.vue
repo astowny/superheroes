@@ -51,12 +51,12 @@
 							<!-- end loading -->
 							<!-- content -->
 							<div v-else class="relative">
-								<hero-details v-if="selectedHero" @deleted="close()" :heroId="selectedHero" class="pt-6" />
-								<div v-else class="py-6 grey lighten-2 relative">
-									<btn-add-hero @addHero="isAddingHero = true" class="elevation-2" />
-									<add-hero-view v-if="isAddingHero" class="py-6 grey lighten-2" />
+								<btn-add-hero class="elevation-2" />
+								<hero-details v-if="stateApp != 'ADD' && selectedHero" @deleted="close()" :heroId="selectedHero" class="pt-6" />
+								<add-hero-view v-if="stateApp == 'ADD'" class="py-6 grey lighten-2" />
+								<div v-if="stateApp == '' && !selectedHero" class="py-6 grey lighten-2 relative">
 									<!-- tabs content -->
-									<v-tabs-items v-else class="grey lighten-2" v-model="tab">
+									<v-tabs-items class="grey lighten-2" v-model="tab">
 										<v-tab-item value="favorites">
 											<favorites />
 										</v-tab-item>
@@ -108,7 +108,7 @@ export default {
 		}
 	},
 	computed: {
-		...mapState(["isAddingHero", "notify", "selectedHero", "heroes"])
+		...mapState(["stateApp", "notify", "selectedHero", "heroes"])
 	}
 };
 </script>
@@ -119,5 +119,9 @@ export default {
 }
 .relative {
 	position: relative;
+}
+.active {
+	transform: rotateZ(45deg);
+	transition: all 0.5s;
 }
 </style>

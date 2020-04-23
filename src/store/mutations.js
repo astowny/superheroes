@@ -7,6 +7,7 @@ import {
   SORT_HEROES_BY_NAME,
   ADD_TO_FAVORITES,
   SET_SELECTED_HERO,
+  SET_STATE_APP
 } from './types/mutations-types'
 import Vue from 'vue'
 
@@ -59,5 +60,8 @@ export default {
   },
   [SET_SELECTED_HERO] (state, heroid) {
     state.selectedHero = heroid
+  },
+  [SET_STATE_APP] (state, stateApp) {
+    state.stateApp = stateApp
   }
 }
