@@ -19,7 +19,8 @@
 				</v-list-item-avatar>
 
 				<v-list-item-content>
-					<v-list-item-title v-html="`${hero.id} - ${hero.name}`"></v-list-item-title>
+					<div class="overline font-weight-light">ID : {{hero.id}}</div>
+					<v-list-item-title v-html="hero.name"></v-list-item-title>
 					<v-list-item-subtitle v-html="hero.description"></v-list-item-subtitle>
 				</v-list-item-content>
 			</v-list-item>
