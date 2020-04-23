@@ -8,8 +8,12 @@
   "paginationmore": "Plus",
   "favoritestab": "Favoris",
   "alltab": "Tous",
+  "SORT_LABEL": "Trier par",
+  "SORT_BTN": "Trier",
+  "SORT_ITEM_NAME": "Nom",
+  "SORT_ITEM_ID": "ID",
   "hero": {
-    "idlabel": "Id",
+    "idlabel": "ID",
     "namelabel": "Nom",
     "imgurllabel": "URL de l'image",
     "descriptionlabel": "Description"

@@ -4,9 +4,9 @@
 		<div>
 			<!-- btn sort -->
 			<div class="d-flex flex-column">
-				<v-overflow-btn v-model="selectedSort" :items="['Name','Id']" label="Sort by"></v-overflow-btn>
-				<v-btn @click="sortHeroesBy()" max-width="200" class="ml-3 mb-3">
-					Sort
+				<v-overflow-btn v-model="selectedSort" :items="sortItems" :label="$t('SORT_LABEL')"></v-overflow-btn>
+				<v-btn @click="sortHeroesBy()" max-width="200" class="ml-3 mb-3" color="primary">
+					{{ $t('SORT_BTN') }}
 				</v-btn>
 			</div>
 			<!-- list items -->
@@ -45,7 +45,11 @@ export default {
 	},
 	data() {
 		return {
-			selectedSort: ""
+			selectedSort: "",
+			sortItems:[
+				{ text: this.$t('SORT_ITEM_NAME'), value:"name"},
+				{ text: this.$t('SORT_ITEM_ID'), value:"id"}
+			]
 		};
 	},
 	methods: {
@@ -53,10 +57,10 @@ export default {
 			this.$store.commit(SET_SELECTED_HERO, hero.id);
 		},
 		sortHeroesBy() {
-			if (this.selectedSort == 'Name') {
+			if (this.selectedSort == 'name') {
 				this.$store.commit(SORT_HEROES_BY_NAME)
 				this.selectedSort = ''
-			} else if (this.selectedSort == 'Id') {
+			} else if (this.selectedSort == 'id') {
 				this.$store.commit(SORT_HEROES_BY_ID)
 				this.selectedSort = ''
 			}

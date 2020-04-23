@@ -8,8 +8,12 @@
   "paginationmore": "Motto",
   "favoritestab":"Okiniiri",
   "alltab":"Zenbu",
+  "SORT_LABEL": "Narabe-gae",
+  "SORT_BTN": "Narabe-gae",
+  "SORT_ITEM_NAME": "Namae",
+  "SORT_ITEM_ID": "ID",
   "hero": {
-    "idlabel": "Id",
+    "idlabel": "ID",
     "namelabel": "Namae",
     "imgurllabel": "Gazō no URL",
     "descriptionlabel": "Setsumei bun"

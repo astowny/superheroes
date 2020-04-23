@@ -12,4 +12,4 @@ the style or position of the sort btn is not very pretty
 
 notification refresh when other notificatino comes
 
-sorting
+barre de recherche
