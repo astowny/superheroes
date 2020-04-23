@@ -86,7 +86,7 @@ import AddHeroView from "./components/AddHeroView";
 import Favorites from "./components/Favorites/index";
 import Notification from "./components/Notification/index";
 import { mapState } from "vuex";
-import { SET_SELECTED_HERO } from "./store/types/mutations-types";
+import { SET_SELECTED_HERO, SET_STATE_APP } from "./store/types/mutations-types";
 
 export default {
 	name: "SuperherosApp",
@@ -105,6 +105,7 @@ export default {
 	methods: {
 		close() {
 			this.$store.commit(SET_SELECTED_HERO, null);
+			this.$store.commit(SET_STATE_APP, '');
 		}
 	},
 	computed: {

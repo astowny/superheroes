@@ -3,17 +3,14 @@
 		<!-- content -->
 		<div>
 			<!-- btn sort -->
-			<div class="d-flex justify-center">
-				<v-btn @click="() => {SORT_HEROES_BY_NAME}">
-					<v-icon>fas fa-sort-alpha-down</v-icon>
+			<div class="d-flex flex-column">
+				<v-overflow-btn v-model="selectedSort" :items="['Name','Id']" label="Sort by"></v-overflow-btn>
+				<v-btn @click="sortHeroesBy()" max-width="200" class="ml-3 mb-3">
+					Sort
 				</v-btn>
 			</div>
 			<!-- list items -->
-			<v-list-item
-				v-for="(hero) in currentPageHeroes"
-				:key="hero.name"
-				@click="selectHero(hero)"
-			>
+			<v-list-item v-for="(hero) in currentPageHeroes" :key="hero.name" @click="selectHero(hero)">
 				<v-list-item-avatar>
 					<v-img :src="hero.imgUrl"></v-img>
 				</v-list-item-avatar>
@@ -34,10 +31,11 @@
 
 <script>
 import Pagination from "./_subs/Pagination";
-import { mapState, mapMutations } from "vuex";
+import { mapState } from "vuex";
 import {
 	SORT_HEROES_BY_NAME,
-	SET_SELECTED_HERO
+	SET_SELECTED_HERO,
+	SORT_HEROES_BY_ID
 } from "../../store/types/mutations-types";
 
 export default {
@@ -45,14 +43,27 @@ export default {
 	components: {
 		Pagination
 	},
+	data() {
+		return {
+			selectedSort: ""
+		};
+	},
 	methods: {
 		selectHero(hero) {
 			this.$store.commit(SET_SELECTED_HERO, hero.id);
+		},
+		sortHeroesBy() {
+			if (this.selectedSort == 'Name') {
+				this.$store.commit(SORT_HEROES_BY_NAME)
+				this.selectedSort = ''
+			} else if (this.selectedSort == 'Id') {
+				this.$store.commit(SORT_HEROES_BY_ID)
+				this.selectedSort = ''
+			}
 		}
 	},
 	computed: {
 		...mapState(["heroes", "pagination"]),
-		...mapMutations([SORT_HEROES_BY_NAME]),
 		currentPageHeroes() {
 			// where to slice : currentPage - 1 * nbItemsPerPage
 			let startSlice =

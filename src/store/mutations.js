@@ -5,6 +5,7 @@ import {
   IS_ADDING_HERO,
   IS_NOT_ADDING_HERO,
   SORT_HEROES_BY_NAME,
+  SORT_HEROES_BY_ID,
   ADD_TO_FAVORITES,
   SET_SELECTED_HERO,
   SET_STATE_APP
@@ -33,7 +34,7 @@ export default {
     state.isAddingHero = false
   },
   [SORT_HEROES_BY_NAME](state) {
-    function compare(a, b) {
+    let compare = function compare(a, b) {
       // Use toUpperCase() to ignore character casing
       const nameA = a.name.toUpperCase();
       const nameB = b.name.toUpperCase();
@@ -46,8 +47,24 @@ export default {
       }
       return comparison;
     }
+    state.heroes.sort(compare)
+  },
+  [SORT_HEROES_BY_ID](state) {
+    function compareId(a, b) {
+      // Use toUpperCase() to ignore character casing
+      const nameA = a.id;
+      const nameB = b.id;
 
-    state.heroes.sort(compare);
+      let comparison = 0;
+      if (nameA > nameB) {
+        comparison = 1;
+      } else if (nameA < nameB) {
+        comparison = -1;
+      }
+      return comparison;
+    }
+
+    state.heroes.sort(compareId);
   },
   [ADD_TO_FAVORITES] (state, heroId) {
     if (state.favoriteHeroesId.indexOf(heroId) === -1) {
