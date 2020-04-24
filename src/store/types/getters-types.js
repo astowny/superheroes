@@ -1,1 +1,2 @@
 export const GET_HERO_BY_ID = 'GET_HERO_BY_ID'
+export const GET_FILTERED_HEROES = 'GET_FILTERED_HEROES'

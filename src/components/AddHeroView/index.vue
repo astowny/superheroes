@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapState } from "vuex";
 import { SET_STATE_APP, ADD_HEROES } from "../../store/types/mutations-types";
 import { GET_HERO_BY_ID } from "../../store/types/getters-types";
 
@@ -61,7 +61,7 @@ export default {
 		},
 		checkId(v) {
 			// is the id already taken ?
-			return !this.GET_HERO_BY_ID(parseInt(v)) || this.$t("error.idtaken");
+			return !this.$store.getters[GET_HERO_BY_ID](parseInt(v)) || this.$t("error.idtaken");
 		},
 		submit() {
 			if (this.$refs["heroId"].validate(true)) {
@@ -84,8 +84,7 @@ export default {
 		}
 	},
 	computed: {
-		...mapState(["heroes"]),
-		...mapGetters([GET_HERO_BY_ID])
+		...mapState(["heroes"])
 	}
 };
 </script>

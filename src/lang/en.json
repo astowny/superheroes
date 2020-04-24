@@ -12,6 +12,7 @@
   "SORT_BTN":"Sort",
   "SORT_ITEM_NAME":"Name",
   "SORT_ITEM_ID":"ID",
+  "SEARCH_LABEL":"Search",
   "hero":{
     "idlabel":"ID",
     "namelabel":"Name",

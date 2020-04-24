@@ -12,4 +12,5 @@ the style or position of the sort btn is not very pretty
 
 notification refresh when other notificatino comes
 
-barre de recherche
+
+translation bug in items of sortbar

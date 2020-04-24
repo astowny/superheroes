@@ -12,6 +12,7 @@
   "SORT_BTN": "Trier",
   "SORT_ITEM_NAME": "Nom",
   "SORT_ITEM_ID": "ID",
+  "SEARCH_LABEL": "Rechercher",
   "hero": {
     "idlabel": "ID",
     "namelabel": "Nom",

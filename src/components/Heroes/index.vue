@@ -2,12 +2,23 @@
 	<div class="py-3 grey lighten-2">
 		<!-- content -->
 		<div>
-			<!-- btn sort -->
-			<div class="d-flex flex-column">
-				<v-overflow-btn v-model="selectedSort" :items="sortItems" :label="$t('SORT_LABEL')"></v-overflow-btn>
-				<v-btn @click="sortHeroesBy()" max-width="200" class="ml-3 mb-3" color="primary">
-					{{ $t('SORT_BTN') }}
-				</v-btn>
+			<!-- filters and sort -->
+			<div class="d-flex justify-space-around">
+				<!-- searchbar -->
+				<div>
+					<v-text-field @click:append-outer="doSearch()" v-model="localSearch" append-outer-icon="fas fa-search" clearable :label="$t('SEARCH_LABEL')"></v-text-field>
+				</div>
+
+				<!-- sort -->
+				<div class="d-flex align-center">
+					<v-select v-model="selectedSort" :items="sortItems" :label="$t('SORT_LABEL')"></v-select>
+					<v-btn
+						@click="sortHeroesBy()"
+						max-width="200"
+						class="ml-3 mb-3"
+						color="primary"
+					>{{ $t('SORT_BTN') }}</v-btn>
+				</div>
 			</div>
 			<!-- list items -->
 			<v-list-item v-for="(hero) in currentPageHeroes" :key="hero.name" @click="selectHero(hero)">
@@ -21,8 +32,9 @@
 					<v-list-item-subtitle v-html="hero.description"></v-list-item-subtitle>
 				</v-list-item-content>
 			</v-list-item>
+			<!-- end list items -->
 			<!--  pagination  -->
-			<pagination :heroes="heroes" />
+			<pagination />
 			<!-- btn moreheroes -->
 		</div>
 		<!-- end content -->
@@ -35,8 +47,10 @@ import { mapState } from "vuex";
 import {
 	SORT_HEROES_BY_NAME,
 	SET_SELECTED_HERO,
-	SORT_HEROES_BY_ID
+	SORT_HEROES_BY_ID,
+	SET_SEARCH
 } from "../../store/types/mutations-types";
+import { GET_FILTERED_HEROES } from "../../store/types/getters-types";
 
 export default {
 	name: "Heroes",
@@ -46,28 +60,36 @@ export default {
 	data() {
 		return {
 			selectedSort: "",
-			sortItems:[
-				{ text: this.$t('SORT_ITEM_NAME'), value:"name"},
-				{ text: this.$t('SORT_ITEM_ID'), value:"id"}
-			]
+			sortItems: [
+				{ text: this.$t("SORT_ITEM_NAME"), value: "name" },
+				{ text: this.$t("SORT_ITEM_ID"), value: "id" }
+			],
+			localSearch: ""
 		};
 	},
 	methods: {
+		doSearch() {
+			this.$store.commit(SET_SEARCH, this.localSearch);
+		},
 		selectHero(hero) {
 			this.$store.commit(SET_SELECTED_HERO, hero.id);
 		},
 		sortHeroesBy() {
-			if (this.selectedSort == 'name') {
-				this.$store.commit(SORT_HEROES_BY_NAME)
-				this.selectedSort = ''
-			} else if (this.selectedSort == 'id') {
-				this.$store.commit(SORT_HEROES_BY_ID)
-				this.selectedSort = ''
+			//
+			if (this.selectedSort == "name") {
+				this.$store.commit(SORT_HEROES_BY_NAME);
+				this.selectedSort = "";
+			} else if (this.selectedSort == "id") {
+				this.$store.commit(SORT_HEROES_BY_ID);
+				this.selectedSort = "";
 			}
 		}
 	},
 	computed: {
 		...mapState(["heroes", "pagination"]),
+		filteredHeroes() {
+			return this.$store.getters[GET_FILTERED_HEROES];
+		},
 		currentPageHeroes() {
 			// where to slice : currentPage - 1 * nbItemsPerPage
 			let startSlice =
@@ -76,11 +98,11 @@ export default {
 			// the end of slice : startSilce + nbItemsPerPage except if end of array in this case length + 1
 			let endSlice =
 				startSlice + this.pagination.visibleItemsPerPageCount <
-				this.heroes.length
+				this.filteredHeroes.length
 					? startSlice + this.pagination.visibleItemsPerPageCount
-					: this.heroes.length + 1;
+					: this.filteredHeroes.length + 1;
 			// set the current page hero list
-			return this.heroes.slice(startSlice, endSlice);
+			return this.filteredHeroes.slice(startSlice, endSlice);
 		}
 	}
 };

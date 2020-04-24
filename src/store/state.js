@@ -3,5 +3,6 @@ export default {
   isAddingHero: false,
   stateApp:'',
   favoriteHeroesId: [],
-  selectedHero: null
+  selectedHero: null,
+  search: ''
 }

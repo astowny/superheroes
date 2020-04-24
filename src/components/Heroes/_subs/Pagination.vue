@@ -3,41 +3,29 @@
 		<v-pagination
 			v-model="currentPage"
 			:length="pageCount"
-			@input="emitInput()"
 			:total-visible="totalVisible"
 			circle
-		>
-    </v-pagination>
-		<v-btn @click="moreHeroes()" class="primary">
-      {{$t('paginationmore')}}
-    </v-btn>
+		></v-pagination>
+		<v-btn @click="moreHeroes()" class="primary">{{$t('paginationmore')}}</v-btn>
 	</div>
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapGetters } from "vuex";
 import { GET_MORE_HEROES } from "../../../store/types/actions-types";
+import { GET_FILTERED_HEROES } from '../../../store/types/getters-types';
 /**
  * Set the array of heroes for the current page
  */
 
 export default {
-	props: {
-		heroes: {
-			type: Array,
-			required: true
-		}
-	},
 	name: "Pagination",
 	data() {
 		return {
-			totalVisible: 5
+			totalVisible: 8
 		};
 	},
 	methods: {
-		emitInput() {
-			this.$emit("input", this.currentPageHeroes);
-		},
 		/**
 		 * Loads more heroes
 		 */
@@ -49,15 +37,16 @@ export default {
 	computed: {
 		...mapState({
 			visibleItemsPerPageCount: state =>
-				state.pagination.visibleItemsPerPageCount
+				state.pagination.visibleItemsPerPageCount,
+			heroes: state => state.heroes
 		}),
-		...mapActions([GET_MORE_HEROES]),
+		...mapGetters({ filteredHeroes: GET_FILTERED_HEROES}),
 		// number of pages in pagination
 		pageCount() {
 			let euclidianDiv = Math.trunc(
-				this.heroes.length / this.visibleItemsPerPageCount
+				this.filteredHeroes.length / this.visibleItemsPerPageCount
 			);
-			let rest = this.heroes.length % this.visibleItemsPerPageCount;
+			let rest = this.filteredHeroes.length % this.visibleItemsPerPageCount;
 			if (rest === 0) {
 				return euclidianDiv;
 			} else {

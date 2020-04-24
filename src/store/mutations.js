@@ -8,7 +8,8 @@ import {
   SORT_HEROES_BY_ID,
   ADD_TO_FAVORITES,
   SET_SELECTED_HERO,
-  SET_STATE_APP
+  SET_STATE_APP,
+  SET_SEARCH
 } from './types/mutations-types'
 import Vue from 'vue'
 
@@ -80,5 +81,8 @@ export default {
   },
   [SET_STATE_APP] (state, stateApp) {
     state.stateApp = stateApp
+  },
+  [SET_SEARCH] (state, word){
+    state.search = word
   }
 }
