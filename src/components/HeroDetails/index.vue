@@ -2,11 +2,11 @@
 	<v-card class="mx-auto grey lighten-2">
 		<v-list-item class="justify-start align-start d-flex">
 			<v-list-item-content>
-				<div class="overline mb-4">{{hero.id}}</div>
+				<div class="overline mb-4">ID : {{hero.id}}</div>
 				<!-- show details without editor -->
 				<div v-if="stateApp !== 'EDIT'" class="align-self-start">
 					<v-list-item-title class="headline overflow-bw mb-1">{{ $t('details', {name: hero.name})}}</v-list-item-title>
-					<p v-if="hero.description" class="text-justify">{{hero.description}}</p>
+					<p v-if="hero.description" class="text-justify">{{ $t('DESCRIPTION_LABEL') }} : {{hero.description}}</p>
 				</div>
 				<!-- end show details without editor -->
 				<!-- editor open -->

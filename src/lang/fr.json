@@ -1,6 +1,7 @@
 {
   "title": "Supeeeeer Héros !!!",
-  "details": "Détails de {name}",
+  "details": "Nom : {name}",
+  "DESCRIPTION_LABEL": "Description",
   "yes": "Oui",
   "no": "Non",
   "loading":"Chargement",
