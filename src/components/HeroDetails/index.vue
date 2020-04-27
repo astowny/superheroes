@@ -16,10 +16,10 @@
 					<v-textarea v-model="cachedHero.description" dense :label="$t('hero.descriptionlabel')"></v-textarea>
 					<!-- btns -->
 					<v-btn @click="save()" color="secondary">
-						<v-icon>fas fa-save</v-icon>
+						{{ $t("SAVE_BTN") }}
 					</v-btn>
 					<v-btn @click="back()" class="ml-4" text color="purple darken-1">
-						<v-icon>fas fa-backspace</v-icon>
+						{{ $t("BACK_BTN") }}
 					</v-btn>
 				</div>
 				<!-- end editor open -->

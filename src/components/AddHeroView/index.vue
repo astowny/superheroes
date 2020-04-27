@@ -26,7 +26,7 @@
 						:label="$t('hero.descriptionlabel')"
 					></v-textarea>
 					<v-btn @click="submit()" color="secondary">
-						<v-icon>fas fa-save</v-icon>
+						{{ $t("SAVE_BTN") }}
 					</v-btn>
 				</div>
 				<!-- end editor open -->

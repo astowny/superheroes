@@ -14,6 +14,8 @@
   "SORT_ITEM_NAME": "Namae",
   "SORT_ITEM_ID": "ID",
   "SEARCH_LABEL": "Sagasu",
+  "SAVE_BTN": "Sēbu",
+  "BACK_BTN": "Bakku",
   "hero": {
     "idlabel": "ID",
     "namelabel": "Namae",

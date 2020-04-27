@@ -14,6 +14,8 @@
   "SORT_ITEM_NAME":"Name",
   "SORT_ITEM_ID":"ID",
   "SEARCH_LABEL":"Search",
+  "SAVE_BTN": "Save",
+  "BACK_BTN": "Back",
   "hero":{
     "idlabel":"ID",
     "namelabel":"Name",

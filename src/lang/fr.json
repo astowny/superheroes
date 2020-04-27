@@ -14,6 +14,8 @@
   "SORT_ITEM_NAME": "Nom",
   "SORT_ITEM_ID": "ID",
   "SEARCH_LABEL": "Rechercher",
+  "SAVE_BTN": "Enregistrer",
+  "BACK_BTN": "Retour",
   "hero": {
     "idlabel": "ID",
     "namelabel": "Nom",
