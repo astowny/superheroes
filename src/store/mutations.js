@@ -7,6 +7,7 @@ import {
   SORT_HEROES_BY_NAME,
   SORT_HEROES_BY_ID,
   ADD_TO_FAVORITES,
+  REMOVE_FROM_FAVORITES,
   SET_SELECTED_HERO,
   SET_STATE_APP,
   SET_SEARCH
@@ -68,12 +69,21 @@ export default {
     state.heroes.sort(compareId);
   },
   [ADD_TO_FAVORITES] (state, heroId) {
+    // if not in favorites
     if (state.favoriteHeroesId.indexOf(heroId) === -1) {
-      state.favoriteHeroesId.unshift(heroId)
+      // add in favorites
+      state.favoriteHeroesId.unshift(heroId);
     }
-
+    // if 6 heroes in favorites
     if (state.favoriteHeroesId.length > 6) {
-      state.favoriteHeroesId.pop()
+      // pop the last one
+      state.favoriteHeroesId.pop();
+    }
+  },
+  [REMOVE_FROM_FAVORITES](state, heroId){
+    let indexInF = state.favoriteHeroesId.indexOf(heroId)
+    if (indexInF !== -1) {
+      state.favoriteHeroesId.splice(indexInF,1)
     }
   },
   [SET_SELECTED_HERO] (state, heroid) {

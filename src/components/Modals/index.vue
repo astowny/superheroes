@@ -2,8 +2,8 @@
 	<div class="d-flex flex-column">
 		<v-dialog v-model="dialog" width="500">
 			<template v-slot:activator="{ on }">
-				<v-btn color="red" dark v-on="on">
-					<v-icon>fas fa-trash</v-icon>
+				<v-btn :color="color" dark v-on="on">
+					<v-icon>{{ icon }}</v-icon>
 				</v-btn>
 			</template>
 
@@ -11,7 +11,7 @@
 				<v-card-title
 					class="headline grey lighten-2 text-center"
 					primary-title
-				>{{$t('confirmationDelete')}}</v-card-title>
+				>{{$t(keyMessage)}}</v-card-title>
 
 				<v-card-actions>
 					<v-btn @click="yes()" color="red" dark depressed>{{$t('yes')}}</v-btn>
@@ -24,6 +24,11 @@
 
 <script>
 export default {
+	props:{
+		keyMessage: String,
+		icon: String,
+		color: String
+	},
 	data() {
 		return {
 			dialog: false

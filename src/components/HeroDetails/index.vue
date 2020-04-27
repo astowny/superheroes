@@ -33,10 +33,11 @@
 				<v-btn @click="edit()" class="my-2 info">
 					<v-icon>fas fa-edit</v-icon>
 				</v-btn>
-				<v-btn @click="addToFavorites()" class="mb-2 success">
+				<v-btn v-if="!isInFavorites" @click="addToFavorites()" :class="isInFavorites ? 'red darken-1' : 'success'" class="mb-2" :dark="isInFavorites">
 					<v-icon>fas fa-star</v-icon>
 				</v-btn>
-				<delete-dialog @yes="deleteHero()" class="mb-2" />
+				<modal v-else key-message="ASK_REMOVE_FROM_FAVORITES" icon="fas fa-star" color="warning" @yes="removeFromFavorites()" class="mb-2" />
+				<modal key-message="confirmationDelete" icon="fas fa-trash" color="red darken-1" @yes="deleteHero()" class="mb-2" />
 				<v-btn @click="closeWindow()" class="mb-3 secondary">
 					<v-icon>fas fa-times</v-icon>
 				</v-btn>
@@ -48,20 +49,22 @@
 
 <script>
 import { mapGetters, mapState } from "vuex";
-import DeleteDialog from "./_subs/deleteDialog";
+import Modal from "../Modals/index";
 import {
 	UPDATE_HERO,
 	DELETE_HERO,
 	ADD_TO_FAVORITES,
+	REMOVE_FROM_FAVORITES,
 	SET_SELECTED_HERO,
 	SET_STATE_APP
 } from "../../store/types/mutations-types";
 import { GET_HERO_BY_ID } from "../../store/types/getters-types";
+import { PUSH_NOTIFICATION } from '../../store/types/actions-types'
 
 export default {
 	name: "HeroDetail",
 	components: {
-		DeleteDialog
+		Modal
 	},
 	props: {
 		heroId: {
@@ -109,15 +112,16 @@ export default {
 			this.$store.commit("setColor", "success");
 		},
 		addToFavorites() {
-			if (this.favoriteHeroesId.indexOf(this.heroId) === -1) {
+			// if not in favorites
+			if (!this.isInFavorites) {
 				this.$store.commit(ADD_TO_FAVORITES, this.heroId);
-				this.$store.commit("setNotification", true);
-				this.$store.commit("setText", "Added to favorites.");
-				this.$store.commit("setColor", "success");
-			} else {
-				this.$store.commit("setNotification", true);
-				this.$store.commit("setText", "Already in favorites.");
-				this.$store.commit("setColor", "error");
+				this.$store.dispatch(PUSH_NOTIFICATION, {text: "Added to favorites.", color: "success"})
+			}
+		},
+		removeFromFavorites() {
+			if (this.isInFavorites) {
+				this.$store.commit(REMOVE_FROM_FAVORITES, this.heroId);
+				this.$store.dispatch(PUSH_NOTIFICATION, {text: "Removed from favorites.", color: "success"})
 			}
 		}
 	},
@@ -126,6 +130,10 @@ export default {
 		...mapGetters([GET_HERO_BY_ID]),
 		hero() {
 			return this[GET_HERO_BY_ID](this.heroId);
+		},
+		isInFavorites() {
+			console.log(this.favoriteHeroesId.indexOf(this.heroId) != -1)
+			return this.favoriteHeroesId.indexOf(this.heroId) != -1
 		}
 	}
 };
