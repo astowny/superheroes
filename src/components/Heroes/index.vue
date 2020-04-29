@@ -4,6 +4,7 @@
 		<div>
 			<!-- filters and sort -->
 			<v-row class="justify-space-around align-end px-2">
+				<!-- searchbar and results -->
 				<v-col>
 					<div class="overline">{{ $t("RESULTS", { count: filteredHeroes.length }) }}</div>
 					<div>
@@ -72,7 +73,7 @@
 		},
 		methods: {
 			doSearch() {
-				this.$store.commit(SET_SEARCH, this.localSearch);
+				this.$store.commit(SET_SEARCH, this.localSearch || '');
 			},
 			selectHero(hero) {
 				this.$store.commit(SET_SELECTED_HERO, hero.id);
