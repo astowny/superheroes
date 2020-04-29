@@ -29,16 +29,25 @@
 						</template>
 					</v-select>
 				</v-col>
-				<v-col>
+				<v-col cols="6" class="align-">
 					<v-switch
-						@change="display = display == 'CARDS' ? 'LIST' : 'CARDS'"
-						:value="display == 'CARDS'"
-						:label="$t('SWITCH_DISPLAY_LABEL')"></v-switch>
+						@change="display = display === 'CARDS' ? 'LIST' : 'CARDS'"
+						:value="display === 'CARDS'"
+						:label="$t('SWITCH_DISPLAY_LABEL')"
+					></v-switch>
+				</v-col>
+				<v-col cols="6">
+					<v-select
+						:items="[3, 5, 8, 13, 15]"
+						v-model="$store.state.pagination.visibleItemsPerPageCount"
+						:label="$t('VISIBLE_ITEMS_PER_PAGE_LABEL')"
+					>
+					</v-select>
 				</v-col>
 			</v-row>
 
 			<!--	display list	-->
-			<div v-if="display == 'LIST'">
+			<div v-if="display === 'LIST'">
 				<v-list-item v-for="(hero) in currentPageHeroes" :key="hero.id" @click="selectHero(hero)">
 					<v-list-item-avatar>
 						<v-img :src="hero.imgUrl" alt="Hero Avatar"></v-img>
@@ -52,7 +61,7 @@
 				</v-list-item>
 			</div>
 			<!-- display cards -->
-			<v-row v-else-if="display == 'CARDS'" class="mx-2 mb-3">
+			<v-row v-else-if="display === 'CARDS'" class="mx-2 mb-3">
 				<v-col v-for="(hero) in currentPageHeroes" :key="hero.id" cols="12" md="6" class="pa-2" >
 					<v-hover v-slot:default="{ hover }">
 						<v-card
@@ -119,11 +128,11 @@
 			},
 			sortHeroesBy() {
 				//
-				if (this.selectedSort == "name") {
+				if (this.selectedSort === "name") {
 					this.$store.commit(SORT_HEROES_BY_NAME);
 					this.selectedSort = "";
 					this.$store.dispatch('notification/add', { text: 'Heroes sorted by name.', color: 'success' })
-				} else if (this.selectedSort == "id") {
+				} else if (this.selectedSort === "id") {
 					this.$store.commit(SORT_HEROES_BY_ID);
 					this.selectedSort = "";
 					this.$store.dispatch('notification/add', { text: 'Heroes sorted by id.', color: 'success' })
@@ -154,7 +163,4 @@
 </script>
 
 <style scoped>
-	.active {
-		background: lightgrey;
-	}
 </style>

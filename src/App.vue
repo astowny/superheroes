@@ -5,7 +5,7 @@
 				<v-row align="center" justify="center">
 					<v-col cols="12" sm="8" md="6">
 						<!-- card of my App -->
-						<v-card class="elevation-12 grey lighten-2">
+						<v-card class="grey lighten-2">
 							<!-- notification -->
 							<NotificationContainer />
 							<!-- toolbar -->
@@ -52,9 +52,9 @@
 							<!-- content -->
 							<div v-else class="relative">
 								<btn-add-hero class="elevation-2" />
-								<hero-details v-if="stateApp != 'ADD' && selectedHero" @deleted="close()" :heroId="selectedHero" class="pt-6" />
-								<add-hero-view v-if="stateApp == 'ADD'" class="py-6 grey lighten-2" />
-								<div v-if="stateApp == '' && !selectedHero" class="py-6 grey lighten-2 relative">
+								<hero-details v-if="stateApp !== 'ADD' && selectedHero" @deleted="close()" :heroId="selectedHero" class="pt-6" />
+								<add-hero-view v-if="stateApp === 'ADD'" class="py-6 grey lighten-2" />
+								<div v-if="stateApp === '' && !selectedHero" class="py-6 grey lighten-2 relative">
 									<!-- tabs content -->
 									<v-tabs-items class="grey lighten-2" v-model="tab">
 										<v-tab-item value="favorites">
@@ -115,14 +115,7 @@ export default {
 </script>
 
 <style scoped>
-.w-full {
-	width: 100%;
-}
 .relative {
 	position: relative;
-}
-.active {
-	transform: rotateZ(45deg);
-	transition: all 0.5s;
 }
 </style>

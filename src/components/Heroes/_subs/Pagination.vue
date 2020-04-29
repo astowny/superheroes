@@ -21,7 +21,6 @@ export default {
 	name: "Pagination",
 	data() {
 		return {
-			totalVisible: 8,
 			isLoading: false
 		};
 	},
@@ -65,6 +64,9 @@ export default {
 			set(value) {
 				this.$store.commit("setCurrentPage", value);
 			}
+		},
+		totalVisible() {
+			return this.$vuetify.breakpoint.mdAndDown ? 5 : 9
 		}
 	}
 };
