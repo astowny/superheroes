@@ -59,7 +59,6 @@ import {
 	SET_STATE_APP
 } from "../../store/types/mutations-types";
 import { GET_HERO_BY_ID } from "../../store/types/getters-types";
-import { PUSH_NOTIFICATION } from '../../store/types/actions-types'
 
 export default {
 	name: "HeroDetail",
@@ -95,9 +94,7 @@ export default {
 			this.$nextTick(() => {
 				// Add the component back in
 				this.$store.commit(SET_STATE_APP, "");
-				this.$store.commit("setNotification", true);
-				this.$store.commit("setText", "Hero saved.");
-				this.$store.commit("setColor", "success");
+				this.$store.dispatch('notification/add', {text: "Hero updated.", color: "success"})
 			});
 		},
 		back() {
@@ -107,21 +104,19 @@ export default {
 		deleteHero() {
 			this.$store.commit(DELETE_HERO, this.heroId);
 			this.$emit("deleted");
-			this.$store.commit("setNotification", true);
-			this.$store.commit("setText", "Hero deleted.");
-			this.$store.commit("setColor", "success");
+			this.$store.dispatch('notification/add', {text: "Hero deleted.", color: "success"})
 		},
 		addToFavorites() {
 			// if not in favorites
 			if (!this.isInFavorites) {
 				this.$store.commit(ADD_TO_FAVORITES, this.heroId);
-				this.$store.dispatch(PUSH_NOTIFICATION, {text: "Added to favorites.", color: "success"})
+				this.$store.dispatch('notification/add', {text: "Added to favorites.", color: "success"})
 			}
 		},
 		removeFromFavorites() {
 			if (this.isInFavorites) {
 				this.$store.commit(REMOVE_FROM_FAVORITES, this.heroId);
-				this.$store.dispatch(PUSH_NOTIFICATION, {text: "Removed from favorites.", color: "success"})
+				this.$store.dispatch('notification/add', {text: "Removed from favorites.", color: "success"})
 			}
 		}
 	},
@@ -132,7 +127,6 @@ export default {
 			return this[GET_HERO_BY_ID](this.heroId);
 		},
 		isInFavorites() {
-			console.log(this.favoriteHeroesId.indexOf(this.heroId) != -1)
 			return this.favoriteHeroesId.indexOf(this.heroId) != -1
 		}
 	}

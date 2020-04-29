@@ -5,7 +5,7 @@ import getters from './getters'
 import actions from './actions'
 import state from './state'
 import pagination from './modules/pagination'
-import notification from './modules/notification/index'
+import * as notification from './modules/notification'
 
 Vue.use(Vuex)
 

@@ -79,9 +79,11 @@ export default {
 			if (this.selectedSort == "name") {
 				this.$store.commit(SORT_HEROES_BY_NAME);
 				this.selectedSort = "";
+				this.$store.dispatch('notification/add', { text: 'Heroes sorted by name.', color: 'success' })
 			} else if (this.selectedSort == "id") {
 				this.$store.commit(SORT_HEROES_BY_ID);
 				this.selectedSort = "";
+				this.$store.dispatch('notification/add', { text: 'Heroes sorted by id.', color: 'success' })
 			}
 		}
 	},

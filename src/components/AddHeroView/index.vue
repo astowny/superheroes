@@ -77,9 +77,7 @@ export default {
 				// close
 				this.$store.commit(SET_STATE_APP, "");
 				// notify
-				this.$store.commit("setNotification", true);
-				this.$store.commit("setText", "Hero added successfully.");
-				this.$store.commit("setColor", "success");
+				this.$store.dispatch('notification/add', { text: 'Hero added.', color: 'success'})
 			}
 		}
 	},

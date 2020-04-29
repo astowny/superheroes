@@ -6,7 +6,7 @@
 			:total-visible="totalVisible"
 			circle
 		></v-pagination>
-		<v-btn @click="moreHeroes()" class="primary">{{$t('paginationmore')}}</v-btn>
+		<v-btn @click="moreHeroes()" :loading="isLoading" class="primary" rounded small>{{$t('paginationmore')}}</v-btn>
 	</div>
 </template>
 
@@ -22,7 +22,8 @@ export default {
 	name: "Pagination",
 	data() {
 		return {
-			totalVisible: 8
+			totalVisible: 8,
+			isLoading: false
 		};
 	},
 	methods: {
@@ -31,7 +32,12 @@ export default {
 		 */
 		moreHeroes() {
 			let offset = this.heroes.length;
-			this.$store.dispatch(GET_MORE_HEROES, offset);
+			// active loading icon
+			this.isLoading = true
+			this.$store.dispatch(GET_MORE_HEROES, offset).then(() => {
+				this.isLoading = false
+			})
+			// then deactivate
 		}
 	},
 	computed: {

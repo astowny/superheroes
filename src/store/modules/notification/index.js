@@ -1,18 +1,29 @@
-export default {
-  state: {
-    notify: false,
-    text: '',
-    color: 'secondary'
+export const namespaced = true
+
+export const state = {
+  notifications: []
+}
+
+let nextId = 0
+export const mutations = {
+  PUSH(state, notification) {
+    state.notifications.push({
+      ...notification,
+      id: nextId++
+    })
   },
-  mutations: {
-    setNotification(state, notif) {
-      state.notify = notif
-    },
-    setText(state, text) {
-      state.text = text
-    },
-    setColor(state, color) {
-      state.color = color
-    }
+  DELETE(state, notToRemove) {
+    state.notifications = state.notifications.filter(
+        not => not.id !== notToRemove.id
+    )
+  }
+}
+
+export const actions = {
+  add({commit}, notification) {
+    commit('PUSH', notification)
+  },
+  remove({ commit }, notToRemove){
+    commit('DELETE', notToRemove)
   }
 }

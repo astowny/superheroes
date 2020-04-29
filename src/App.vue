@@ -7,7 +7,7 @@
 						<!-- card of my App -->
 						<v-card class="elevation-12 grey lighten-2">
 							<!-- notification -->
-							<notification />
+							<NotificationContainer />
 							<!-- toolbar -->
 							<v-toolbar color="primary" dark flat>
 								<v-toolbar-title>{{ $t("title") }}</v-toolbar-title>
@@ -84,7 +84,7 @@ import ChangeLocale from "./components/ChangeLocale";
 import BtnAddHero from "./components/BtnAddHero/index";
 import AddHeroView from "./components/AddHeroView";
 import Favorites from "./components/Favorites/index";
-import Notification from "./components/Notification/index";
+import NotificationContainer from "./components/Notification/NotificationContainer";
 import { mapState } from "vuex";
 import { SET_SELECTED_HERO, SET_STATE_APP } from "./store/types/mutations-types";
 
@@ -96,7 +96,7 @@ export default {
 		BtnAddHero,
 		AddHeroView,
 		Favorites,
-		Notification,
+		NotificationContainer,
 		HeroDetails
 	},
 	data: () => ({
