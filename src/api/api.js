@@ -1,8 +1,7 @@
 import axios from 'axios'
 import md5 from 'blueimp-md5'
-import { ADD_HEROES } from '../store/types/mutations-types'
 
-export default async function (contexte, offset = 0) {
+export default function ( offset = 0) {
   let uri = "https://cors-anywhere.herokuapp.com/http://gateway.marvel.com/v1/public/characters"
   let apiKey = "71ec8973d57482113929b8e07a0d45cf"
   // let hash= "f50508978f0a50a26020a0f499e05133"
@@ -12,7 +11,7 @@ export default async function (contexte, offset = 0) {
   let limit = 100
 
   // call api
-  let response = await axios.get(uri, {
+  return axios.get(uri, {
     params: {
       apikey: apiKey,
       ts: ts,
@@ -21,26 +20,4 @@ export default async function (contexte, offset = 0) {
       offset: offset
     }
   })
-
-  if (response.status === 200 && response.data.data && response.data.data.count > 0) {
-    let heroestmp = [];
-
-    response.data.data.results.forEach(hero => {
-      // has
-      let herotmp = {
-        id: hero.id,
-        name: hero.name,
-        description: hero.description ? hero.description : '',
-        imgUrl: hero.thumbnail ? hero.thumbnail.path + '/portrait_medium.' + hero.thumbnail.extension : ''
-      }
-
-      heroestmp.push(herotmp)
-    });
-
-    contexte.commit(ADD_HEROES, { heroes: heroestmp })
-    // console.log(response.data)
-  } else {
-    console.log("No status 200 but error : " + response.status)
-    
-  }
 }
