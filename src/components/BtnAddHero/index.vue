@@ -1,6 +1,6 @@
 <template v-slot:extension>
 	<v-btn @click="addHeroOrClose()" :class="{active: stateApp}" :color="stateApp ? 'info' : 'secondary'" dark small absolute top right fab>
-		<v-icon>fas fa-plus</v-icon>
+		<v-icon small>fas fa-plus</v-icon>
 	</v-btn>
 </template>
 

@@ -31,15 +31,15 @@
 					<v-img :src="hero.imgUrl"></v-img>
 				</v-list-item-avatar>
 				<v-btn @click="edit()" class="my-2 info">
-					<v-icon>fas fa-edit</v-icon>
+					<v-icon small>fas fa-edit</v-icon>
 				</v-btn>
 				<v-btn v-if="!isInFavorites" @click="addToFavorites()" :class="isInFavorites ? 'red darken-1' : 'success'" class="mb-2" :dark="isInFavorites">
-					<v-icon>fas fa-star</v-icon>
+					<v-icon small>fas fa-star</v-icon>
 				</v-btn>
 				<modal v-else key-message="ASK_REMOVE_FROM_FAVORITES" icon="fas fa-star" color="warning" @yes="removeFromFavorites()" class="mb-2" />
 				<modal key-message="confirmationDelete" icon="fas fa-trash" color="red darken-1" @yes="deleteHero()" class="mb-2" />
-				<v-btn @click="closeWindow()" class="mb-3 secondary">
-					<v-icon>fas fa-times</v-icon>
+				<v-btn @click="closeWindow()" class="mb-3 black" dark>
+					<v-icon small>fas fa-times</v-icon>
 				</v-btn>
 			</div>
 			<!-- end img and buttons -->

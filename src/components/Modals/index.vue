@@ -3,7 +3,7 @@
 		<v-dialog v-model="dialog" width="500">
 			<template v-slot:activator="{ on }">
 				<v-btn :color="color" dark v-on="on">
-					<v-icon>{{ icon }}</v-icon>
+					<v-icon small>{{ icon }}</v-icon>
 				</v-btn>
 			</template>
 

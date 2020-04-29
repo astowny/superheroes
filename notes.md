@@ -11,5 +11,3 @@
 notification refresh when other notificatino comes
 
 translation bug in items of sortbar
-
-loading icon when loads  more heroes

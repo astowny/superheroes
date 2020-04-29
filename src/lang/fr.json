@@ -17,6 +17,7 @@
   "SAVE_BTN": "Enregistrer",
   "BACK_BTN": "Retour",
   "ASK_REMOVE_FROM_FAVORITES": "Ce héros va être supprimé de vos héros favoris. Continuer ?",
+  "RESULTS": "{count} résultats",
   "hero": {
     "idlabel": "ID",
     "namelabel": "Nom",

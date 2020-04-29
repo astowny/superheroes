@@ -17,6 +17,7 @@
   "SAVE_BTN": "Save",
   "BACK_BTN": "Back",
   "ASK_REMOVE_FROM_FAVORITES": "This hero will be removed from your favorite heroes. Continue ?",
+  "RESULTS": "{count} results",
   "hero":{
     "idlabel":"ID",
     "namelabel":"Name",

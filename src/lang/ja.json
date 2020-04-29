@@ -17,6 +17,7 @@
   "SAVE_BTN": "Sēbu",
   "BACK_BTN": "Bakku",
   "ASK_REMOVE_FROM_FAVORITES": "Kono hīrō wa, okiniiri no hīrō kara sakujo sa remasu. Tsudzukemasu ka ?",
+  "RESULTS": "{count} No Kekka",
   "hero": {
     "idlabel": "ID",
     "namelabel": "Namae",
