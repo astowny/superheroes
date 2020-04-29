@@ -11,3 +11,5 @@
 notification refresh when other notificatino comes
 
 translation bug in items of sortbar
+
+translation in notifications

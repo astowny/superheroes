@@ -18,6 +18,7 @@
   "BACK_BTN": "Retour",
   "ASK_REMOVE_FROM_FAVORITES": "Ce héros va être supprimé de vos héros favoris. Continuer ?",
   "RESULTS": "{count} résultats",
+  "SWITCH_DISPLAY_LABEL": "Afficher en cartes",
   "hero": {
     "idlabel": "ID",
     "namelabel": "Nom",

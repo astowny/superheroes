@@ -1,45 +1,83 @@
 <template>
-	<div class="py-3 grey lighten-2">
+	<div class="grey lighten-2">
 		<!-- content -->
 		<div>
 			<!-- filters and sort -->
 			<v-row class="justify-space-around align-end px-2">
 				<!-- searchbar and results -->
-				<v-col>
+				<v-col cols="6">
 					<div class="overline">{{ $t("RESULTS", { count: filteredHeroes.length }) }}</div>
-					<div>
-						<v-text-field @click:append-outer="doSearch()" v-model="localSearch" append-outer-icon="fas fa-search" clearable :label="$t('SEARCH_LABEL')"></v-text-field>
-						<!-- count heroes -->
-					</div>
+					<v-text-field
+						v-model="localSearch"
+						clearable
+						:label="$t('SEARCH_LABEL')"
+					>
+						<template v-slot:append-outer>
+							<v-btn @click="doSearch()" text><v-icon small>fas fa-search</v-icon></v-btn>
+						</template>
+					</v-text-field>
+				</v-col>
+				<v-col cols="6">
+					<!-- sort -->
+					<v-select
+						v-model="selectedSort"
+						:items="sortItems"
+						:label="$t('SORT_LABEL')"
+						>
+						<template v-slot:append-outer>
+							<v-btn @click="sortHeroesBy()" text><v-icon small>fas fa-sort</v-icon></v-btn>
+						</template>
+					</v-select>
 				</v-col>
 				<v-col>
-					<!-- sort -->
-					<div class="d-flex align-center">
-						<v-select v-model="selectedSort" :items="sortItems" :label="$t('SORT_LABEL')"></v-select>
-						<v-btn
-										@click="sortHeroesBy()"
-										max-width="200"
-										class="ml-3 mb-3"
-										color="primary"
-						>{{ $t('SORT_BTN') }}</v-btn>
-					</div>
+					<v-switch
+						@change="display = display == 'CARDS' ? 'LIST' : 'CARDS'"
+						:value="display == 'CARDS'"
+						:label="$t('SWITCH_DISPLAY_LABEL')"></v-switch>
 				</v-col>
 			</v-row>
-			<!-- list items -->
-			<v-list-item v-for="(hero) in currentPageHeroes" :key="hero.name" @click="selectHero(hero)">
-				<v-list-item-avatar>
-					<v-img :src="hero.imgUrl"></v-img>
-				</v-list-item-avatar>
 
-				<v-list-item-content>
-					<div class="overline font-weight-light">ID : {{hero.id}}</div>
-					<v-list-item-title v-html="hero.name"></v-list-item-title>
-					<v-list-item-subtitle v-html="hero.description"></v-list-item-subtitle>
-				</v-list-item-content>
-			</v-list-item>
-			<!-- end list items -->
+			<!--	display list	-->
+			<div v-if="display == 'LIST'">
+				<v-list-item v-for="(hero) in currentPageHeroes" :key="hero.id" @click="selectHero(hero)">
+					<v-list-item-avatar>
+						<v-img :src="hero.imgUrl" alt="Hero Avatar"></v-img>
+					</v-list-item-avatar>
+
+					<v-list-item-content>
+						<div class="overline font-weight-light">ID : {{hero.id}}</div>
+						<v-list-item-title v-html="hero.name"></v-list-item-title>
+						<v-list-item-subtitle v-html="hero.description"></v-list-item-subtitle>
+					</v-list-item-content>
+				</v-list-item>
+			</div>
+			<!-- display cards -->
+			<v-row v-else-if="display == 'CARDS'" class="mx-2 mb-3">
+				<v-col v-for="(hero) in currentPageHeroes" :key="hero.id" cols="12" md="6" class="pa-2" >
+					<v-hover v-slot:default="{ hover }">
+						<v-card
+							@click="selectHero(hero)"
+							:elevation="hover ? 12 : 2"
+							outlined
+							height="100%"
+						>
+							<v-list-item three-line>
+								<v-list-item-content>
+									<div class="overline mb-4">ID : {{ hero.id }}</div>
+									<v-list-item-title class="headline mb-1">{{ hero.name }}</v-list-item-title>
+									<v-list-item-subtitle>{{ hero.description }}</v-list-item-subtitle>
+								</v-list-item-content>
+
+								<v-list-item-avatar tile size="80" color="grey">
+									<v-img :src="hero.imgUrl" alt="Hero Avatar"></v-img>
+								</v-list-item-avatar>
+							</v-list-item>
+						</v-card>
+					</v-hover>
+				</v-col>
+			</v-row>
 			<!--  pagination  -->
-			<pagination />
+			<pagination class="mx-2" />
 		</div>
 		<!-- end content -->
 	</div>
@@ -63,6 +101,7 @@
 		},
 		data() {
 			return {
+				display:'LIST',
 				selectedSort: "",
 				sortItems: [
 					{ text: this.$t("SORT_ITEM_NAME"), value: "name" },
@@ -99,14 +138,14 @@
 			currentPageHeroes() {
 				// where to slice : currentPage - 1 * nbItemsPerPage
 				let startSlice =
-								this.pagination.visibleItemsPerPageCount *
-								(this.pagination.currentPage - 1);
+					this.pagination.visibleItemsPerPageCount *
+					(this.pagination.currentPage - 1);
 				// the end of slice : startSilce + nbItemsPerPage except if end of array in this case length + 1
 				let endSlice =
-								startSlice + this.pagination.visibleItemsPerPageCount <
-								this.filteredHeroes.length
-												? startSlice + this.pagination.visibleItemsPerPageCount
-												: this.filteredHeroes.length + 1;
+					startSlice + this.pagination.visibleItemsPerPageCount <
+					this.filteredHeroes.length
+						? startSlice + this.pagination.visibleItemsPerPageCount
+						: this.filteredHeroes.length + 1;
 				// set the current page hero list
 				return this.filteredHeroes.slice(startSlice, endSlice);
 			}
