@@ -8,7 +8,7 @@
 
 -- OK error on addhero when updating imgurl
 
-notification refresh when other notificatino comes
+~notification refresh when other notificatino comes
 
 translation bug in items of sortbar
 

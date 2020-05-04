@@ -112,10 +112,6 @@
 			return {
 				display:'LIST',
 				selectedSort: "",
-				sortItems: [
-					{ text: this.$t("SORT_ITEM_NAME"), value: "name" },
-					{ text: this.$t("SORT_ITEM_ID"), value: "id" }
-				],
 				localSearch: ""
 			};
 		},
@@ -124,6 +120,7 @@
 				this.$store.commit(SET_SEARCH, this.localSearch || '');
 			},
 			selectHero(hero) {
+				this.$router.push({ name: 'heroDetails', params: { heroId: hero.id } })
 				this.$store.commit(SET_SELECTED_HERO, hero.id);
 			},
 			sortHeroesBy() {
@@ -131,16 +128,22 @@
 				if (this.selectedSort === "name") {
 					this.$store.commit(SORT_HEROES_BY_NAME);
 					this.selectedSort = "";
-					this.$store.dispatch('notification/add', { text: 'Heroes sorted by name.', color: 'success' })
+					this.$store.dispatch('notification/add', { text: this.$t('NOTIFICATION.SORTED_BY_NAME'), color: 'success' })
 				} else if (this.selectedSort === "id") {
 					this.$store.commit(SORT_HEROES_BY_ID);
 					this.selectedSort = "";
-					this.$store.dispatch('notification/add', { text: 'Heroes sorted by id.', color: 'success' })
+					this.$store.dispatch('notification/add', { text: this.$t('NOTIFICATION.SORTED_BY_ID'), color: 'success' })
 				}
 			}
 		},
 		computed: {
 			...mapState(["heroes", "pagination"]),
+			sortItems() {
+				return [
+					{ text: this.$t("SORT_ITEM_NAME"), value: "name" },
+					{ text: this.$t("SORT_ITEM_ID"), value: "id" }
+				]
+			},
 			filteredHeroes() {
 				return this.$store.getters[GET_FILTERED_HEROES];
 			},

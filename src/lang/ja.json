@@ -20,6 +20,16 @@
   "RESULTS": "{count} No Kekka",
   "SWITCH_DISPLAY_LABEL": "Chizu ni hyōji",
   "VISIBLE_ITEMS_PER_PAGE_LABEL": "Hyōji suru hīrō no kazu.",
+  "NOTIFICATION": {
+    "SORTED_BY_NAME": "Namae de narabe kae rareta hīrō.",
+    "SORTED_BY_ID": "Hīrō o ID de sōto.",
+    "HERO_ADDED": "Hīrō ga tsuika sa remashita.",
+    "HERO_UPDATED": "Shūsei sa reta hīrō.",
+    "HERO_DELETED": "Hīrō o sakujo shimashita.",
+    "HERO_ADDED_TO_FAVORITES": "Hīrō ga okiniiri ni tsuika sa remashita.",
+    "HERO_REMOVED_FROM_FAVORITES": "Hīrō o okiniiri kara sakujo shimashita.",
+    "ERROR_GET_MORE_HEROES": "Error while calling getMoreHeroes."
+  },
   "hero": {
     "idlabel": "ID",
     "namelabel": "Namae",

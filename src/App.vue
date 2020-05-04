@@ -16,12 +16,11 @@
 								<template v-slot:extension class="py-6 grey lighten-2">
 									<!-- tabs -->
 									<v-tabs @change="close()" v-model="tab" background-color="primary" dark>
-										<v-tab href="#favorites">
+										<v-tab @click="manageRoute('favorites')" href="#favorites">
 											<v-icon class="mr-2">fas fa-heart</v-icon>
 											{{$t('favoritestab')}}
 										</v-tab>
-
-										<v-tab href="#all">
+										<v-tab @click="manageRoute('heroes')" href="#all">
 											<v-icon class="mr-2">fas fa-user-secret</v-icon>
 											{{$t('alltab')}}
 										</v-tab>
@@ -50,21 +49,10 @@
 							</v-row>
 							<!-- end loading -->
 							<!-- content -->
-							<div v-else class="relative">
+							<div v-else class="relative py-2">
 								<btn-add-hero class="elevation-2" />
-								<hero-details v-if="stateApp !== 'ADD' && selectedHero" @deleted="close()" :heroId="selectedHero" class="pt-6" />
-								<add-hero-view v-if="stateApp === 'ADD'" class="py-6 grey lighten-2" />
-								<div v-if="stateApp === '' && !selectedHero" class="py-6 grey lighten-2 relative">
-									<!-- tabs content -->
-									<v-tabs-items class="grey lighten-2" v-model="tab">
-										<v-tab-item value="favorites">
-											<favorites />
-										</v-tab-item>
-										<v-tab-item value="all">
-											<heroes />
-										</v-tab-item>
-									</v-tabs-items>
-								</div>
+								<!-- tabs content -->
+								<router-view></router-view>
 								<!-- end tabs content -->
 							</div>
 							<!-- end content -->
@@ -78,44 +66,40 @@
 </template>
 
 <script>
-import Heroes from "./components/Heroes/index";
-import HeroDetails from "./components/HeroDetails/index";
-import ChangeLocale from "./components/ChangeLocale";
-import BtnAddHero from "./components/BtnAddHero/index";
-import AddHeroView from "./components/AddHeroView";
-import Favorites from "./components/Favorites/index";
-import NotificationContainer from "./components/Notification/NotificationContainer";
-import { mapState } from "vuex";
-import { SET_SELECTED_HERO, SET_STATE_APP } from "./store/types/mutations-types";
+	import ChangeLocale from "./components/ChangeLocale";
+	import BtnAddHero from "./components/BtnAddHero/index";
+	import NotificationContainer from "./components/Notification/NotificationContainer";
+	import { mapState } from "vuex";
+	import { SET_SELECTED_HERO, SET_STATE_APP } from "./store/types/mutations-types";
 
-export default {
-	name: "SuperherosApp",
-	components: {
-		Heroes,
-		ChangeLocale,
-		BtnAddHero,
-		AddHeroView,
-		Favorites,
-		NotificationContainer,
-		HeroDetails
-	},
-	data: () => ({
-		tab: null
-	}),
-	methods: {
-		close() {
-			this.$store.commit(SET_SELECTED_HERO, null);
-			this.$store.commit(SET_STATE_APP, '');
+	export default {
+		name: "SuperherosApp",
+		components: {
+			ChangeLocale,
+			BtnAddHero,
+			NotificationContainer,
+		},
+		data: () => ({
+			tab: null
+		}),
+		methods: {
+			close() {
+				this.$store.commit(SET_SELECTED_HERO, null);
+				this.$store.commit(SET_STATE_APP, '');
+			},
+			manageRoute(name){
+				if (this.$route.name !== name)
+					this.$router.push({ name: name })
+			}
+		},
+		computed: {
+			...mapState(["stateApp", "selectedHero", "heroes"])
 		}
-	},
-	computed: {
-		...mapState(["stateApp", "notify", "selectedHero", "heroes"])
-	}
-};
+	};
 </script>
 
 <style scoped>
-.relative {
-	position: relative;
-}
+	.relative {
+		position: relative;
+	}
 </style>

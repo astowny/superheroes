@@ -4,5 +4,5 @@ export default {
   stateApp:'',
   favoriteHeroesId: [],
   selectedHero: null,
-  search: ''
+  search: '',
 }

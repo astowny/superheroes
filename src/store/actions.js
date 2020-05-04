@@ -1,5 +1,5 @@
 import callApi from '../api/api';
-import {ADD_HEROES} from "./types/mutations-types";
+import { ADD_HEROES } from "./types/mutations-types";
 
 export default {
   // call the api to fill the store
@@ -23,7 +23,7 @@ export default {
 
           context.commit(ADD_HEROES, { heroes: heroestmp })
         } else {
-          context.dispatch('notification/add', {text: 'Error while loading more heroes.', color: 'error'})
+          context.dispatch('notification/add', {text: this.$t('NOTIFICATION.ERROR_GET_MORE_HEROES'), color: 'error'})
         }
         resolve()
       })

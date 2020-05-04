@@ -20,6 +20,16 @@
   "RESULTS": "{count} results",
   "SWITCH_DISPLAY_LABEL": "Display cards",
   "VISIBLE_ITEMS_PER_PAGE_LABEL": "Number of heroes to display.",
+  "NOTIFICATION": {
+    "SORTED_BY_NAME": "Heroes sorted by name.",
+    "SORTED_BY_ID": "Heroes sorted by ID.",
+    "HERO_ADDED": "Hero added.",
+    "HERO_UPDATED": "Hero updated.",
+    "HERO_DELETED": "Hero deleted.",
+    "HERO_ADDED_TO_FAVORITES": "Hero added to favorites.",
+    "HERO_REMOVED_FROM_FAVORITES": "Hero removed from favorites.",
+    "ERROR_GET_MORE_HEROES": "Error while calling getMoreHeroes."
+  },
   "hero":{
     "idlabel":"ID",
     "namelabel":"Name",

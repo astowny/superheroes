@@ -20,6 +20,16 @@
   "RESULTS": "{count} résultats",
   "SWITCH_DISPLAY_LABEL": "Afficher en cartes",
   "VISIBLE_ITEMS_PER_PAGE_LABEL": "Nombre de héros à afficheer.",
+  "NOTIFICATION": {
+    "SORTED_BY_NAME": "Héros triés par nom.",
+    "SORTED_BY_ID": "Héros triés par ID.",
+    "HERO_ADDED": "Héro ajouté.",
+    "HERO_UPDATED": "Héro modifié.",
+    "HERO_DELETED": "Héro supprimé.",
+    "HERO_ADDED_TO_FAVORITES": "Héro ajouté aux favoris.",
+    "HERO_REMOVED_FROM_FAVORITES": "Héro supprimé des favoris.",
+    "ERROR_GET_MORE_HEROES": "Error while calling getMoreHeroes."
+  },
   "hero": {
     "idlabel": "ID",
     "namelabel": "Nom",

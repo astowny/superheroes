@@ -1,5 +1,5 @@
 <template>
-	<v-card class="mx-auto" max-width="90%" outlined>
+	<v-card class="mx-auto transparent" max-width="90%" outlined>
 		<v-list-item class="justify-start align-start d-flex">
 			<v-list-item-content>
 				<!-- editor open -->
@@ -12,7 +12,14 @@
 						class="my-2"
 						dense
 					>{{cachedHero.id}}</v-text-field>
-					<v-text-field v-model="cachedHero.name" class="my-2" dense :label="$t('hero.namelabel')"></v-text-field>
+					<v-text-field
+						ref="heroName"
+						:rules="[v => !!v || 'Name required']"
+						v-model="cachedHero.name"
+						class="my-2"
+						dense
+						:label="$t('hero.namelabel')"
+					></v-text-field>
 					<v-text-field
 						v-model.lazy="cachedHero.imgUrl"
 						class="my-2"
@@ -64,7 +71,13 @@ export default {
 			return !this.$store.getters[GET_HERO_BY_ID](parseInt(v)) || this.$t("error.idtaken");
 		},
 		submit() {
-			if (this.$refs["heroId"].validate(true)) {
+			let isValid = false
+
+			isValid = this.$refs['heroId'].validate(true) && this.$refs['heroName'].validate(true)
+
+			if (isValid) {
+				// route
+				this.$router.push({ name: 'heroes' })
 				// save the new hero
 				this.$store.commit(ADD_HEROES, {
 					heroes: [
@@ -77,7 +90,7 @@ export default {
 				// close
 				this.$store.commit(SET_STATE_APP, "");
 				// notify
-				this.$store.dispatch('notification/add', { text: 'Hero added.', color: 'success'})
+				this.$store.dispatch('notification/add', { text: this.$t('NOTIFICATION.HERO_ADDED'), color: 'success'})
 			}
 		}
 	},

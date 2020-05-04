@@ -2,7 +2,7 @@ import { GET_HERO_BY_ID, GET_FILTERED_HEROES } from "./types/getters-types"
 
 export default {
   [GET_HERO_BY_ID]: (state) => (id) => {
-    return state.heroes.find(h => h.id === id)
+    return state.heroes.find(h => h.id == id)
   },
   [GET_FILTERED_HEROES]: (state) => {
     let s = state.search.toUpperCase()

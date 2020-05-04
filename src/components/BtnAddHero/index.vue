@@ -12,8 +12,10 @@ export default {
   methods:{
     addHeroOrClose() {
       if (!this.stateApp){
+				this.$router.push({ name: 'addHero'})
         this.$store.commit(SET_STATE_APP, 'ADD')
       } else {
+				this.$router.go(-1)
         this.$store.commit(SET_STATE_APP, '')
       }
     }

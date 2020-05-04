@@ -28,6 +28,7 @@ export default {
 	},
 	methods: {
 		showDetails(id) {
+			this.$router.push({ name: 'heroDetails', params: { heroId: id }})
 			this.$store.commit(SET_SELECTED_HERO, id);
 		}
 	},

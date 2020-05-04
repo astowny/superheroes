@@ -34,7 +34,6 @@ export default {
 			this.isLoading = true
 			this.$store.dispatch('getMoreHeroes', offset).then(() => {
 				this.isLoading = false
-				console.log('is loading set false')
 			})
 		}
 	},
